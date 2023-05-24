@@ -1,0 +1,306 @@
+24-05-2023 | 11:46:38.464 | INFO  | 55 | logStarting | c.t.R.RoleRestApplication | Starting RoleRestApplication using Java 17.0.6 on PI-IN-L42 with PID 280155 (/home/User-L42/Downloads/RoleRest/target/classes started by User-L42 in /home/User-L42/Downloads/RoleRest)
+24-05-2023 | 11:46:38.466 | INFO  | 631 | logStartupProfileInfo | c.t.R.RoleRestApplication | No active profile set, falling back to 1 default profile: "default"
+24-05-2023 | 11:46:38.521 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+24-05-2023 | 11:46:38.522 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+24-05-2023 | 11:46:39.277 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+24-05-2023 | 11:46:39.336 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 49 ms. Found 3 JPA repository interfaces.
+24-05-2023 | 11:46:39.896 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8090 (http)
+24-05-2023 | 11:46:39.905 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+24-05-2023 | 11:46:39.906 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+24-05-2023 | 11:46:39.962 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+24-05-2023 | 11:46:39.963 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 1440 ms
+24-05-2023 | 11:46:40.131 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+24-05-2023 | 11:46:40.169 | INFO  | 44 | logVersion | o.h.Version | HHH000412: Hibernate ORM core version 5.6.15.Final
+24-05-2023 | 11:46:40.297 | INFO  | 56 | <clinit> | o.h.a.c.Version | HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+24-05-2023 | 11:46:40.378 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Starting...
+24-05-2023 | 11:46:40.718 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Start completed.
+24-05-2023 | 11:46:40.746 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+24-05-2023 | 11:46:41.367 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+24-05-2023 | 11:46:41.381 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+24-05-2023 | 11:46:41.872 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+24-05-2023 | 11:46:42.557 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+24-05-2023 | 11:46:42.608 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8090 (http) with context path ''
+24-05-2023 | 11:46:42.622 | INFO  | 61 | logStarted | c.t.R.RoleRestApplication | Started RoleRestApplication in 4.541 seconds (JVM running for 5.377)
+24-05-2023 | 11:50:53.923 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+24-05-2023 | 11:50:53.924 | INFO  | 525 | initServletBean | o.s.w.s.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+24-05-2023 | 11:50:53.926 | INFO  | 547 | initServletBean | o.s.w.s.DispatcherServlet | Completed initialization in 2 ms
+24-05-2023 | 11:50:54.030 | INFO  | 25 | createRole | c.t.R.s.RoleServiceImpl | Entered into createRole method
+24-05-2023 | 11:50:54.095 | DEBUG | 28 | createRole | c.t.R.s.RoleServiceImpl | Saving Role com.training.RoleRest.entity.Role@44ba6023 data to the database 
+24-05-2023 | 11:53:16.287 | INFO  | 25 | createRole | c.t.R.s.RoleServiceImpl | Entered into createRole method
+24-05-2023 | 11:53:16.304 | DEBUG | 28 | createRole | c.t.R.s.RoleServiceImpl | Saving Role com.training.RoleRest.entity.Role@1aad795d data to the database 
+24-05-2023 | 11:54:34.419 | INFO  | 94 | update | c.t.R.s.RoleServiceImpl | Entered into updateModule method
+24-05-2023 | 11:54:34.419 | DEBUG | 95 | update | c.t.R.s.RoleServiceImpl | Updating module with name null with updates {name=CA} 
+24-05-2023 | 11:54:34.535 | ERROR | 121 | update | c.t.R.s.RoleServiceImpl | Module with name null not found in the database
+24-05-2023 | 11:54:34.543 | ERROR | 175 | log | o.a.c.c.C.[.[.[.[dispatcherServlet] | Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalArgumentException: User with name null not found.] with root cause
+java.lang.IllegalArgumentException: User with name null not found.
+	at com.training.RoleRest.serviceImpl.RoleServiceImpl.update(RoleServiceImpl.java:122)
+	at com.training.RoleRest.controller.RoleController.update(RoleController.java:65)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:880)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+24-05-2023 | 11:54:46.753 | INFO  | 94 | update | c.t.R.s.RoleServiceImpl | Entered into updateModule method
+24-05-2023 | 11:54:46.754 | DEBUG | 95 | update | c.t.R.s.RoleServiceImpl | Updating module with name   with updates {name=CA} 
+24-05-2023 | 11:54:46.757 | ERROR | 121 | update | c.t.R.s.RoleServiceImpl | Module with name   not found in the database
+24-05-2023 | 11:54:46.759 | ERROR | 175 | log | o.a.c.c.C.[.[.[.[dispatcherServlet] | Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalArgumentException: User with name   not found.] with root cause
+java.lang.IllegalArgumentException: User with name   not found.
+	at com.training.RoleRest.serviceImpl.RoleServiceImpl.update(RoleServiceImpl.java:122)
+	at com.training.RoleRest.controller.RoleController.update(RoleController.java:65)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:880)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+24-05-2023 | 11:54:55.674 | INFO  | 94 | update | c.t.R.s.RoleServiceImpl | Entered into updateModule method
+24-05-2023 | 11:54:55.675 | DEBUG | 95 | update | c.t.R.s.RoleServiceImpl | Updating module with name "" with updates {name=CA} 
+24-05-2023 | 11:54:55.678 | ERROR | 121 | update | c.t.R.s.RoleServiceImpl | Module with name "" not found in the database
+24-05-2023 | 11:54:55.679 | ERROR | 175 | log | o.a.c.c.C.[.[.[.[dispatcherServlet] | Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalArgumentException: User with name "" not found.] with root cause
+java.lang.IllegalArgumentException: User with name "" not found.
+	at com.training.RoleRest.serviceImpl.RoleServiceImpl.update(RoleServiceImpl.java:122)
+	at com.training.RoleRest.controller.RoleController.update(RoleController.java:65)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:880)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+24-05-2023 | 11:55:45.093 | INFO  | 94 | update | c.t.R.s.RoleServiceImpl | Entered into updateModule method
+24-05-2023 | 11:55:45.093 | DEBUG | 95 | update | c.t.R.s.RoleServiceImpl | Updating module with name CA with updates {name=Ca} 
+24-05-2023 | 11:55:45.130 | ERROR | 175 | log | o.a.c.c.C.[.[.[.[dispatcherServlet] | Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.IncorrectResultSizeDataAccessException: query did not return a unique result: 2; nested exception is javax.persistence.NonUniqueResultException: query did not return a unique result: 2] with root cause
+javax.persistence.NonUniqueResultException: query did not return a unique result: 2
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:128)
+	at org.hibernate.query.internal.AbstractProducedQuery.getSingleResult(AbstractProducedQuery.java:1672)
+	at org.hibernate.query.criteria.internal.compile.CriteriaQueryTypeQueryAdapter.getSingleResult(CriteriaQueryTypeQueryAdapter.java:111)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$SingleEntityExecution.doExecute(JpaQueryExecution.java:198)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:90)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:156)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:144)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:137)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:121)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:160)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:139)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:81)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:145)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:220)
+	at jdk.proxy4/jdk.proxy4.$Proxy126.findByName(Unknown Source)
+	at com.training.RoleRest.serviceImpl.RoleServiceImpl.update(RoleServiceImpl.java:96)
+	at com.training.RoleRest.controller.RoleController.update(RoleController.java:65)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:880)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+24-05-2023 | 11:57:04.896 | INFO  | 94 | update | c.t.R.s.RoleServiceImpl | Entered into updateModule method
+24-05-2023 | 11:57:04.897 | DEBUG | 95 | update | c.t.R.s.RoleServiceImpl | Updating module with name CA with updates {name=Ca} 
+24-05-2023 | 11:57:04.926 | DEBUG | 118 | update | c.t.R.s.RoleServiceImpl | Updated module com.training.RoleRest.entity.Role@63b86797 in the database
+24-05-2023 | 11:57:23.051 | INFO  | 94 | update | c.t.R.s.RoleServiceImpl | Entered into updateModule method
+24-05-2023 | 11:57:23.051 | DEBUG | 95 | update | c.t.R.s.RoleServiceImpl | Updating module with name Ca with updates {name=CA} 
+24-05-2023 | 11:57:23.074 | DEBUG | 118 | update | c.t.R.s.RoleServiceImpl | Updated module com.training.RoleRest.entity.Role@78209d9c in the database
+24-05-2023 | 11:59:11.896 | DEBUG | 39 | getAllRole | c.t.R.s.RoleServiceImpl | Fetching all the roles from the database
+24-05-2023 | 11:59:42.090 | DEBUG | 42 | getAllRoleMappings | c.t.R.s.RoleModuleMappingServiceImpl | Fetching all the Role Module mappings from the database
+24-05-2023 | 12:00:03.272 | DEBUG | 39 | getAllRole | c.t.R.s.RoleServiceImpl | Fetching all the roles from the database
+24-05-2023 | 12:28:02.565 | INFO  | 57 | updateModule | c.t.R.s.ModuleServiceImpl | Entered into updateModule method
+24-05-2023 | 12:28:02.566 | DEBUG | 58 | updateModule | c.t.R.s.ModuleServiceImpl | Updating module with id 4 with updates com.training.RoleRest.model.ModuleModel@68cff5f4 
+24-05-2023 | 12:28:02.589 | DEBUG | 66 | updateModule | c.t.R.s.ModuleServiceImpl | Updated module com.training.RoleRest.entity.Module@3ccdebd7 in the database 
+24-05-2023 | 12:29:20.831 | INFO  | 24 | createModule | c.t.R.s.ModuleServiceImpl | Entered into createModule method
+24-05-2023 | 12:29:20.848 | DEBUG | 32 | createModule | c.t.R.s.ModuleServiceImpl | Saving Modulecom.training.RoleRest.entity.Module@6c9ddd8e data to the database 
+24-05-2023 | 12:30:33.843 | INFO  | 99 | update | c.t.R.s.ModuleServiceImpl | Entered into updateModule method
+24-05-2023 | 12:30:33.844 | DEBUG | 100 | update | c.t.R.s.ModuleServiceImpl | Updating module with name IM Manager with updates {description=This is  for IM Manager Module} 
+24-05-2023 | 12:30:33.850 | DEBUG | 119 | update | c.t.R.s.ModuleServiceImpl | Updated module com.training.RoleRest.entity.Module@454c128b in the database
+24-05-2023 | 12:30:46.070 | INFO  | 99 | update | c.t.R.s.ModuleServiceImpl | Entered into updateModule method
+24-05-2023 | 12:30:46.071 | DEBUG | 100 | update | c.t.R.s.ModuleServiceImpl | Updating module with name IM Manager with updates {description=This is for IM Manager Module} 
+24-05-2023 | 12:30:46.074 | DEBUG | 119 | update | c.t.R.s.ModuleServiceImpl | Updated module com.training.RoleRest.entity.Module@46791f15 in the database
+24-05-2023 | 12:30:57.145 | DEBUG | 44 | getAllModule | c.t.R.s.ModuleServiceImpl | Fetching all the modules from the database
+24-05-2023 | 12:31:17.451 | DEBUG | 50 | getModuleByName | c.t.R.s.ModuleServiceImpl | Fetching module with name IM Manager from the database 
+24-05-2023 | 12:31:39.725 | INFO  | 83 | deleteModule | c.t.R.s.ModuleServiceImpl | Entered into updateModule method
+24-05-2023 | 12:31:39.725 | DEBUG | 84 | deleteModule | c.t.R.s.ModuleServiceImpl | Deleting module with id 5 from the database 
+24-05-2023 | 12:31:39.747 | DEBUG | 87 | deleteModule | c.t.R.s.ModuleServiceImpl | Deleted the module with id 5 from the database 
+24-05-2023 | 12:31:50.955 | DEBUG | 44 | getAllModule | c.t.R.s.ModuleServiceImpl | Fetching all the modules from the database
+24-05-2023 | 12:34:43.587 | INFO  | 27 | createRoleMapping | c.t.R.s.RoleModuleMappingServiceImpl | Entered into createRoleMapping method
+24-05-2023 | 12:34:43.621 | DEBUG | 30 | createRoleMapping | c.t.R.s.RoleModuleMappingServiceImpl | Saving RoleModuleMapping com.training.RoleRest.entity.RoleModuleMapping@2525ca62 data to the database 
+24-05-2023 | 12:35:44.599 | INFO  | 106 | update | c.t.R.s.RoleModuleMappingServiceImpl | Entered into update method
+24-05-2023 | 12:35:44.599 | DEBUG | 107 | update | c.t.R.s.RoleModuleMappingServiceImpl | Updating Role Module Mapping with id 4 with updates {moduleId=2} 
+24-05-2023 | 12:35:44.609 | DEBUG | 139 | update | c.t.R.s.RoleModuleMappingServiceImpl | Updated Role Module Mapping com.training.RoleRest.entity.RoleModuleMapping@41241f99 in the database
