@@ -11,9 +11,9 @@ import com.training.RoleRest.entity.RoleModuleMapping;
 @Repository
 public interface RoleModuleMappingRepository extends JpaRepository<RoleModuleMapping, Integer> {
 
-	@Query(nativeQuery = true,value = "select * from role_module_mapping_table where role_id = ?")
+	@Query(nativeQuery = true,value = "select * from role_module_mapping_table where role_id = ? and is_deleted = false")
 	List<RoleModuleMapping> getByRoleId(int id);
 	
-	@Query(nativeQuery = true,value = "select * from role_module_mapping_table where module_id = ?")
+	@Query(nativeQuery = true,value = "select * from role_module_mapping_table where module_id = ? and is_deleted = false")
 	List<RoleModuleMapping> getByModuleId(int id);
 }

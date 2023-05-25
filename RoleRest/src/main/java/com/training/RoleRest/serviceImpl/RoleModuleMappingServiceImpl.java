@@ -140,7 +140,7 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 			return roleModuleMappingRepository.save(newModule);
 		} else {
 			log.error("Module with id {} not found in the database", id);
-			throw new IllegalArgumentException("User with name " + id + " not found.");
+			throw new IllegalArgumentException("User with id " + id + " not found.");
 		}
 	}
 	

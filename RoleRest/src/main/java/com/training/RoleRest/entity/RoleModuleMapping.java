@@ -1,5 +1,6 @@
 package com.training.RoleRest.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,11 +28,11 @@ public class RoleModuleMapping {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
 	private Role roleId;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "module_id", referencedColumnName = "id")
 	private Module moduleId;
 	
