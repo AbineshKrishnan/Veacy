@@ -1,40 +1,30 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.training.RoleRest.model;
 
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ModuleModel {
-	private int id;
+	
+	@NotNull
 	private String moduleName;
+	
+	@NotNull
 	private String description;
+	
 	private boolean isDeleted = false;
 	private boolean isActive = true;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getModuleName() {
-		return moduleName;
-	}
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public boolean isDeleted() {
-		return isDeleted;
-	}
-	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-	public boolean isActive() {
-		return isActive;
-	}
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
+	
+	
 	
 }

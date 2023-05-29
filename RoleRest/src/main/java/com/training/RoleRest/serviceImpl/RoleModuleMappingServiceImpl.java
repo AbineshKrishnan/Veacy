@@ -1,11 +1,21 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.training.RoleRest.serviceImpl;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.training.RoleRest.Response.ApiReturnResponse;
+import com.training.RoleRest.Response.MessageProperties;
 import com.training.RoleRest.entity.Module;
 import com.training.RoleRest.entity.Role;
 import com.training.RoleRest.entity.RoleModuleMapping;
@@ -22,31 +32,59 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 	@Autowired
 	RoleModuleMappingRepository roleModuleMappingRepository;
 	
+	ApiReturnResponse apiReturnResponse = new ApiReturnResponse();
+	
+	@Autowired
+	MessageProperties messageProperties;
+	
 	@Override
-	public String createRoleMapping(RoleModuleMapping roleModuleMapping) {
+	public ResponseEntity<ApiReturnResponse> createRoleMapping(RoleModuleMappingModel roleModuleMappingModel) {
 		log.info("Entered into createRoleMapping method");
+		if(roleModuleMappingRepository.getRoleIdAndModuleId(roleModuleMappingModel.getModuleId(),roleModuleMappingModel.getRoleId()).isEmpty()) {
 		try {
+			RoleModuleMapping roleModuleMapping = new RoleModuleMapping();
+			BeanUtils.copyProperties(roleModuleMappingModel, roleModuleMapping);
+			Role role = new Role();
+			Module module = new Module();
+			role.setId(roleModuleMappingModel.getRoleId());
+			module.setId(roleModuleMappingModel.getModuleId());
+			roleModuleMapping.setRoleId(role);
+			roleModuleMapping.setModuleId(module);
 			roleModuleMappingRepository.save(roleModuleMapping);
-			log.debug("Saving RoleModuleMapping {} data to the database ",roleModuleMapping);
-			return "Created Successfully";
+			log.debug("Saving RoleModuleMapping {} data to the database ",roleModuleMappingModel);
+			apiReturnResponse.setStatus(Boolean.TRUE);
+			apiReturnResponse.setMessage(messageProperties.getSUCCESS());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 			log.warn("Role is not created");
-			return "Error occured while Creating";
+			apiReturnResponse.setStatus(Boolean.FALSE);
+			apiReturnResponse.setMessage(messageProperties.getERROR_CODE_500());
+			apiReturnResponse.setStatusCode(messageProperties.getINERNAL_SERVER_ERROR());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		}
+		else {
+			apiReturnResponse.setStatus(Boolean.FALSE);
+			apiReturnResponse.setMessage(messageProperties.getROLE_MODULE_MAPPING_ALREADY_EXISTS());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
 
 	@Override
-	public List<RoleModuleMapping> getAllRoleMappings() {
+	public List<RoleModuleMapping> getAllRoleModuleMappings() {
 		log.debug("Fetching all the Role Module mappings from the database");
 		return roleModuleMappingRepository.findAll();
 	}
 
 	@Override
-	public String updateRoleMapping(int id, RoleModuleMappingModel roleModuleMappingModel) {
+	public ResponseEntity<ApiReturnResponse> updateRoleMapping(int id, RoleModuleMappingModel roleModuleMappingModel) {
 		log.info("Entered into updateRoleMapping method");
 		log.debug("Updating Role Module Mapping with id {} with updates {} ",id ,roleModuleMappingModel);
+		if(roleModuleMappingRepository.getRoleIdAndModuleId(roleModuleMappingModel.getModuleId(),roleModuleMappingModel.getRoleId()).isEmpty()) {
 		try {
 			Optional<RoleModuleMapping> optionalRole = roleModuleMappingRepository.findById(id);
 			if(optionalRole.isPresent()) {
@@ -59,33 +97,64 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 				roleModuleMapping.setDeletee(roleModuleMappingModel.isDeletee());
 				roleModuleMappingRepository.save(roleModuleMapping);
 				log.debug("Updated Role Module Mapping {} in the database ",roleModuleMapping);
-				return "Updated Successfully";
+				apiReturnResponse.setStatus(Boolean.TRUE);
+				apiReturnResponse.setMessage(messageProperties.getSUCCESS());
+				apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
 			}
 			else {
 				log.warn("Role Module Mapping with id {} not found in the database ",id);
-				return "Invalid Request";
+				apiReturnResponse.setStatus(Boolean.FALSE);
+				apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
+				apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				return new ResponseEntity<>(apiReturnResponse,HttpStatus.NOT_ACCEPTABLE);
 			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 			log.warn("Role Module Mapping is not updated");
-			return "Error Occured while Updating";
+			apiReturnResponse.setStatus(Boolean.FALSE);
+			apiReturnResponse.setMessage(messageProperties.getINERNAL_SERVER_ERROR());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_500());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		}
+		else {
+			apiReturnResponse.setStatus(Boolean.FALSE);
+			apiReturnResponse.setMessage(messageProperties.getROLE_MODULE_MAPPING_ALREADY_EXISTS());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
 
 	@Override
-	public String deleteRoleMapping(int id) {
+	public ResponseEntity<ApiReturnResponse> deleteRoleMapping(int id) {
 		log.info("Entered into deleteRoleMapping method");
 		log.debug("Deleting Role Module Mapping with id {} from the database ", id);
+		Optional<RoleModuleMapping> temp = roleModuleMappingRepository.findById(id);
 		try {
+			if(temp.isEmpty()) {
+				apiReturnResponse.setStatus(Boolean.FALSE);
+				apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
+				apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				return new ResponseEntity<>(apiReturnResponse,HttpStatus.NOT_ACCEPTABLE);
+			}
+			else {
 			roleModuleMappingRepository.deleteById(id);
 			log.debug("Deleted the Role Module Mapping with id {} from the database ",id);
-			return "Deleted Successfully";
+			apiReturnResponse.setStatus(Boolean.TRUE);
+			apiReturnResponse.setMessage(messageProperties.getSUCCESS());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
+			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 			log.warn("Role Module Mapping is not deleted");
-			return "Error Occured while Deleting";
+			apiReturnResponse.setStatus(Boolean.FALSE);
+			apiReturnResponse.setMessage(messageProperties.getINERNAL_SERVER_ERROR());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_500());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -102,7 +171,7 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 	}
 
 	@Override
-	public RoleModuleMapping update(int id, Map<String, Object> update) {
+	public ResponseEntity<ApiReturnResponse> update(int id, Map<String, Object> update) {
 		log.info("Entered into update method");
 		log.debug("Updating Role Module Mapping with id {} with updates {} ",id ,update);
 		Optional<RoleModuleMapping> oldModule = roleModuleMappingRepository.findById(id);
@@ -137,12 +206,17 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 				}
 			});
 			log.debug("Updated Role Module Mapping {} in the database", newModule);
-			return roleModuleMappingRepository.save(newModule);
+			roleModuleMappingRepository.save(newModule);
+			apiReturnResponse.setStatus(Boolean.TRUE);
+			apiReturnResponse.setMessage(messageProperties.getSUCCESS());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
 		} else {
 			log.error("Module with id {} not found in the database", id);
-			throw new IllegalArgumentException("User with id " + id + " not found.");
+			apiReturnResponse.setStatus(Boolean.TRUE);
+			apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
 		}
 	}
-	
-	
 }

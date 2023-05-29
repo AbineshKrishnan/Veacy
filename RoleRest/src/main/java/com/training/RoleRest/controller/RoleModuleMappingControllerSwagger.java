@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.training.RoleRest.controller;
 
 import java.util.List;
@@ -5,6 +9,8 @@ import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import com.training.RoleRest.Response.ApiReturnResponse;
 import com.training.RoleRest.entity.RoleModuleMapping;
 import com.training.RoleRest.model.RoleModuleMappingModel;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,12 +25,12 @@ public interface RoleModuleMappingControllerSwagger {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = RoleModuleMapping.class))})})
-	public String createRoleMapping(@RequestBody RoleModuleMapping roleModuleMapping);
+	public ResponseEntity<ApiReturnResponse> createRoleMapping(@RequestBody RoleModuleMappingModel roleModuleMappingModel);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = RoleModuleMapping.class))})})
-	public ResponseEntity<List<RoleModuleMapping>> getAllRoleMappings();
+	public ResponseEntity<List<RoleModuleMapping>> getAllRoleModuleMappings();
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
@@ -39,16 +45,16 @@ public interface RoleModuleMappingControllerSwagger {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = RoleModuleMapping.class))})})
-	public String updateRoleMapping(@PathVariable int id, @RequestBody RoleModuleMappingModel roleModuleMappingModel);
+	public ResponseEntity<ApiReturnResponse> updateRoleMapping(@PathVariable int id, @RequestBody RoleModuleMappingModel roleModuleMappingModel);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = RoleModuleMapping.class))})})
-	public String deleteRoleMapping(@PathVariable int id);
+	public ResponseEntity<ApiReturnResponse> deleteRoleMapping(@PathVariable int id);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = RoleModuleMapping.class))})})
-	public RoleModuleMapping update(@PathVariable int id, @RequestBody Map<String, Object> update);
+	public ResponseEntity<ApiReturnResponse> update(@PathVariable int id, @RequestBody Map<String, Object> update);
 
 }

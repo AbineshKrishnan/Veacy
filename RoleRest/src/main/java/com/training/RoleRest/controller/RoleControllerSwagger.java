@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.training.RoleRest.controller;
 
 import java.util.List;
@@ -8,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.training.RoleRest.Response.ApiReturnResponse;
 import com.training.RoleRest.entity.Role;
 import com.training.RoleRest.model.RoleModel;
 
@@ -23,7 +28,7 @@ public interface RoleControllerSwagger {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Role.class))})})
-	public String createRole(@RequestBody Role role);
+	public ResponseEntity<ApiReturnResponse> createRole(@RequestBody RoleModel roleModel);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
@@ -38,16 +43,16 @@ public interface RoleControllerSwagger {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Role.class))})})
-	public String updateRole(@PathVariable String name, @RequestBody RoleModel roleModel);
+	public ResponseEntity<ApiReturnResponse> updateRole(@PathVariable String name, @RequestBody RoleModel roleModel);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Role.class))})})
-	public String deleteRole(@PathVariable int id);
+	public ResponseEntity<ApiReturnResponse> deleteRole(@PathVariable String name);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Role.class))})})
-	public Role update(@PathVariable String name,@RequestBody Map<String, Object> updates);
+	public ResponseEntity<ApiReturnResponse> update(@PathVariable String name,@RequestBody Map<String, Object> updates);
 
 }

@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.training.RoleRest.controller;
 
 import java.util.List;
@@ -7,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.training.RoleRest.entity.Module;
+import com.training.RoleRest.Response.ApiReturnResponse;
 import com.training.RoleRest.model.ModuleModel;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,7 +25,7 @@ public interface ModuleControllerSwagger {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Module.class))})})
-	public String createModule(@RequestBody ModuleModel moduleModel);
+	public ResponseEntity<ApiReturnResponse> createModule(@RequestBody ModuleModel moduleModel);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
@@ -35,16 +40,16 @@ public interface ModuleControllerSwagger {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Module.class))})})
-	public String updateModule(@PathVariable int id,@RequestBody ModuleModel moduleModel);
+	public ResponseEntity<ApiReturnResponse> updateModule(@PathVariable int id,@RequestBody ModuleModel moduleModel);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Module.class))})})
-	public String deleteModule(@PathVariable int id);
+	public ResponseEntity<ApiReturnResponse> deleteModule(@PathVariable String moduleName);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Module.class))})})
-	public Module updateModule(@PathVariable String name, @RequestBody Map<String, Object> update);
+	public ResponseEntity<ApiReturnResponse> updateModule(@PathVariable String name, @RequestBody Map<String, Object> update);
 
 }

@@ -1,10 +1,21 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.training.RoleRest.serviceImpl;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.training.RoleRest.Response.ApiReturnResponse;
+import com.training.RoleRest.Response.MessageProperties;
 import com.training.RoleRest.entity.Module;
 import com.training.RoleRest.model.ModuleModel;
 import com.training.RoleRest.repository.ModuleRepository;
@@ -19,23 +30,40 @@ public class ModuleServiceImpl implements ModuleService {
 	@Autowired
 	ModuleRepository moduleRepository;
 	
+	
+	ApiReturnResponse apiReturnResponse = new ApiReturnResponse();
+	
+	@Autowired
+	MessageProperties messageProperties;
+	
 	@Override
-	public String createModule(ModuleModel moduleModel) {
+	public ResponseEntity<ApiReturnResponse> createModule(ModuleModel moduleModel) {
 		log.info("Entered into createModule method");
+		if(moduleRepository.findByModuleName(moduleModel.getModuleName()).isEmpty()) {
 		try {
 			Module module = new Module();
-			module.setName(moduleModel.getModuleName());
-			module.setDescription(moduleModel.getDescription());
-			module.setDeleted(false);
-			module.setActive(true);
+			BeanUtils.copyProperties(moduleModel, module);
 			moduleRepository.save(module);
 			log.debug("Saving Module{} data to the database ",module);
-			return "Created Successfully";
+			apiReturnResponse.setStatus(Boolean.TRUE);
+			apiReturnResponse.setMessage(messageProperties.getSUCCESS());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 			log.warn("Module is not created");
-			return "Error occured while Creating";
+			apiReturnResponse.setStatus(Boolean.FALSE);
+			apiReturnResponse.setMessage(messageProperties.getERROR_CODE_500());
+			apiReturnResponse.setStatusCode(messageProperties.getINERNAL_SERVER_ERROR());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.INTERNAL_SERVER_ERROR); 
+		}
+		}
+		else {
+			apiReturnResponse.setStatus(Boolean.FALSE);
+			apiReturnResponse.setMessage(messageProperties.getMODULE_ALREADY_EXISTS());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
 
@@ -48,63 +76,93 @@ public class ModuleServiceImpl implements ModuleService {
 	@Override
 	public Optional<Module> getModuleByName(String moduleName) {
 		log.debug("Fetching module with name {} from the database ", moduleName);
-		Optional<Module> module = moduleRepository.findByName(moduleName);
+		Optional<Module> module = moduleRepository.findByModuleName(moduleName);
 		return module;
 	}
 
 	@Override
-	public String updateModule(int id, ModuleModel moduleModel) {
+	public ResponseEntity<ApiReturnResponse> updateModule(int id, ModuleModel moduleModel) {
 		log.info("Entered into updateModule method");
 		log.debug("Updating module with id {} with updates {} ",id ,moduleModel);
+		if(moduleRepository.findByModuleName(moduleModel.getModuleName()).isEmpty()) {
 		try {
 			Optional<Module> optionalRole = moduleRepository.findById(id);
 			if(optionalRole.isPresent()) {
 				Module module = optionalRole.get();
-				module.setName(moduleModel.getModuleName());
-				module.setDescription(moduleModel.getDescription());
+				BeanUtils.copyProperties(moduleModel, module);
 				moduleRepository.save(module);
 				log.debug("Updated module {} in the database ",module);
-				return "Updated Successfully";
+				apiReturnResponse.setStatus(Boolean.TRUE);
+				apiReturnResponse.setMessage(messageProperties.getSUCCESS());
+				apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
 			}
 			else {
 				log.warn("Module with id {} not found in the database ",id);
-				return "Invalid Request";
+				apiReturnResponse.setStatus(Boolean.FALSE);
+				apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
+				apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				return new ResponseEntity<>(apiReturnResponse,HttpStatus.NOT_ACCEPTABLE);
 			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 			log.warn("Module is not updated");
-			return "Error occured while Updating";
+			apiReturnResponse.setStatus(Boolean.FALSE);
+			apiReturnResponse.setMessage(messageProperties.getINERNAL_SERVER_ERROR());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_500());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		}
+		else {
+			apiReturnResponse.setStatus(Boolean.FALSE);
+			apiReturnResponse.setMessage(messageProperties.getMODULE_ALREADY_EXISTS());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
 
 	@Override
-	public String deleteModule(int id) {
-		log.info("Entered into updateModule method");
-		log.debug("Deleting module with id {} from the database ", id);
+	public ResponseEntity<ApiReturnResponse> deleteModule(String moduleName) {
+		log.info("Entered into deleteModule method");
+		log.debug("Deleting role with name {} from the database ", moduleName);
+		Optional<Module> temp = moduleRepository.findByModuleName(moduleName);
 		try {
-			moduleRepository.deleteById(id);
-			log.debug("Deleted the module with id {} from the database ",id);
-			return "Deleted Successfully";
+			if(temp.isEmpty()) {
+				apiReturnResponse.setStatus(Boolean.FALSE);
+				apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
+				apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				return new ResponseEntity<>(apiReturnResponse,HttpStatus.NOT_ACCEPTABLE);
+			}else {
+				Module m3 = temp.get();
+				moduleRepository.deleteById(m3.getId());
+				apiReturnResponse.setStatus(Boolean.TRUE);
+				apiReturnResponse.setMessage(messageProperties.getSUCCESS());
+				apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
+			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 			log.warn("Module is not deleted");
-			return "Error occured while Deleting";
+			apiReturnResponse.setStatus(Boolean.FALSE);
+			apiReturnResponse.setMessage(messageProperties.getINERNAL_SERVER_ERROR());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_500());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@Override
-	public Module update(String name, Map<String, Object> update) {
+	public ResponseEntity<ApiReturnResponse> update(String name, Map<String, Object> update) {
 		log.info("Entered into updateModule method");
 		log.debug("Updating module with name {} with updates {} ",name ,update);
-		Optional<Module> oldModule = moduleRepository.findByName(name);
+		Optional<Module> oldModule = moduleRepository.findByModuleName(name);
 		if(oldModule.isPresent()) {
 			Module newModule = oldModule.get();
 			update.forEach((field, value) -> {
 				switch (field) {
-				case "name":
-					newModule.setName((String) value);
+				case "moduleName":
+					newModule.setModuleName((String) value);
 					break;
 				case "description":
 					newModule.setDescription((String) value);
@@ -117,10 +175,17 @@ public class ModuleServiceImpl implements ModuleService {
 				}
 			});
 			log.debug("Updated module {} in the database", newModule);
-			return moduleRepository.save(newModule);
+			moduleRepository.save(newModule);
+			apiReturnResponse.setStatus(Boolean.TRUE);
+			apiReturnResponse.setMessage(messageProperties.getSUCCESS());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
 		} else {
 			log.error("Module with name {} not found in the database", name);
-			throw new IllegalArgumentException("User with name " + name + " not found.");
+			apiReturnResponse.setStatus(Boolean.TRUE);
+			apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
 		}
 	}
 }

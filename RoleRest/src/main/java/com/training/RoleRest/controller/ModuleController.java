@@ -1,9 +1,12 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.training.RoleRest.controller;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +19,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.training.RoleRest.Response.ApiReturnResponse;
 import com.training.RoleRest.entity.Module;
 import com.training.RoleRest.model.ModuleModel;
 import com.training.RoleRest.service.ModuleService;
+
+/**
+ * The ModuleController class is a REST controller that handles HTTP requests
+ * related to module management in the application.
+ */
 
 @RestController
 @RequestMapping("/module")
@@ -28,19 +36,39 @@ public class ModuleController implements ModuleControllerSwagger{
 	@Autowired
 	ModuleService moduleService;
 	
-	@PostMapping("/create")
-	public String createModule(@RequestBody ModuleModel moduleModel) {
-		String module = moduleService.createModule(moduleModel);
-		return module;
+	/**
+     * Create a new m.
+     *
+     * @param module the module object to be created.
+     * @return a ResponseEntity containing the created Module object.
+     */
+	
+	@PostMapping
+	public ResponseEntity<ApiReturnResponse> createModule(@RequestBody ModuleModel moduleModel) {
+		return moduleService.createModule(moduleModel);
+		
 	}
 	
-	@GetMapping("/getAll")
+	/**
+     * Get all modules.
+     *
+     * @return a ResponseEntity containing a list of all Module objects.
+     */
+	
+	@GetMapping
 	public ResponseEntity<List<Module>> getAllModule(){
 		List<Module> module = moduleService.getAllModule();
 		return new ResponseEntity<>(module, HttpStatus.OK);
 	}
 	
-	@GetMapping("/get/{moduleName}")
+	/**
+     * Get a module by Name.
+     *
+     * @param name the unique identifier of the module.
+     * @return a ResponseEntity containing the Module object if found, or not found status if not found.
+     */
+	
+	@GetMapping("/{moduleName}")
 	public ResponseEntity<Optional<Module>> getModuleByName(@PathVariable("moduleName") String ModuleName){
 		Optional<Module> module = moduleService.getModuleByName(ModuleName);
 		if(module !=null) {
@@ -51,25 +79,41 @@ public class ModuleController implements ModuleControllerSwagger{
 		}
 	}
 	
-	@PutMapping("/update/{id}")
-	public String updateModule(@PathVariable int id,@RequestBody ModuleModel moduleModel){
-		String module = moduleService.updateModule(id,moduleModel);
-		if(module !=null) {
-			return "Updated Successfully";
-		}
-		else {
-			return "Error!";
-		}
+	/**
+     * Update a module's properties given its unique identifier.
+     *
+     * @param id the unique identifier of the module.
+     * @param updates a model containing the properties to be updated and their new values.
+     * @return the updated Module object.
+     */
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<ApiReturnResponse> updateModule(@PathVariable int id,@RequestBody ModuleModel moduleModel){
+		return moduleService.updateModule(id,moduleModel);
 	}
 	
-	@DeleteMapping("/delete/{id}")
-	public String deleteModule(@PathVariable int id) {
-		moduleService.deleteModule(id);
-		return "Deleted Successfully";
+	/**
+     * Delete a module by its unique name.
+     *
+     * @param name the unique name of the module.
+     * @return a ResponseEntity with no content status.
+     */
+	
+	@DeleteMapping("/{moduleName}")
+	public ResponseEntity<ApiReturnResponse> deleteModule(@PathVariable String moduleName) {
+		return moduleService.deleteModule(moduleName);
 	}
 	
-	@PatchMapping("/edit/{name}")
-	public Module updateModule(@PathVariable String name, @RequestBody Map<String, Object> update) {
-		return moduleService.update(name, update);
+	/**
+     * Update a module's properties given its unique name.
+     *
+     * @param name the unique name of the module.
+     * @param updates a map containing the properties to be updated and their new values.
+     * @return the updated Module object.
+     */
+	
+	@PatchMapping("/{moduleName}")
+	public ResponseEntity<ApiReturnResponse> updateModule(@PathVariable String moduleName, @RequestBody Map<String, Object> update) {
+		return moduleService.update(moduleName, update);
 	}
 }

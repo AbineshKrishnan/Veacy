@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.training.RoleRest.controller;
 
 import java.util.List;
@@ -16,9 +20,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.training.RoleRest.Response.ApiReturnResponse;
 import com.training.RoleRest.entity.RoleModuleMapping;
 import com.training.RoleRest.model.RoleModuleMappingModel;
 import com.training.RoleRest.service.RoleModuleMappingService;
+
+/**
+ * The RoleModuleMappingController class is a REST controller that handles HTTP requests
+ * related to role module mapping management in the application.
+ */
 
 @RestController
 @RequestMapping("/rolemodulemapping")
@@ -27,16 +37,36 @@ public class RoleModuleMappingController implements RoleModuleMappingControllerS
 	@Autowired
 	RoleModuleMappingService roleMappingService;
 	
+	/**
+     * Create a new role module mapping.
+     *
+     * @param role module mapping the role module mapping object to be created.
+     * @return a ResponseEntity containing the created Role Module Mapping object.
+     */
+	
 	@PostMapping("/create")
-	public String createRoleMapping(@RequestBody RoleModuleMapping roleModuleMapping){
-		return roleMappingService.createRoleMapping(roleModuleMapping);
+	public ResponseEntity<ApiReturnResponse> createRoleMapping(@RequestBody RoleModuleMappingModel roleModuleMappingModel){
+		return roleMappingService.createRoleMapping(roleModuleMappingModel);
 	}
 	
+	/**
+     * Get all Role Module Mappings.
+     *
+     * @return a ResponseEntity containing a list of all Role Module Mapping objects.
+     */
+	
 	@GetMapping("/getAll")
-	public ResponseEntity<List<RoleModuleMapping>> getAllRoleMappings(){
-		List<RoleModuleMapping> roleModuleMappings = roleMappingService.getAllRoleMappings();
+	public ResponseEntity<List<RoleModuleMapping>> getAllRoleModuleMappings(){
+		List<RoleModuleMapping> roleModuleMappings = roleMappingService.getAllRoleModuleMappings();
 		return new ResponseEntity<>(roleModuleMappings, HttpStatus.OK);
 	}
+	
+	/**
+     * Get a role module mapping by RoleID.
+     *
+     * @param id the unique identifier of the role.
+     * @return a ResponseEntity containing the Role Module Mapping object if found, or not found status if not found.
+     */
 	
 	@GetMapping("/getbyroleid/{id}")
 	public ResponseEntity<List<RoleModuleMapping>> getByRoleId(@PathVariable int id){
@@ -44,26 +74,54 @@ public class RoleModuleMappingController implements RoleModuleMappingControllerS
 		return new ResponseEntity<>(roleModuleMapping, HttpStatus.OK);
 	}
 	
+	/**
+     * Get a role module mapping by ModuleID.
+     *
+     * @param id the unique identifier of the module.
+     * @return a ResponseEntity containing the Role Module Mapping object if found, or not found status if not found.
+     */
+	
 	@GetMapping("/getbymoduleid/{id}")
 	public ResponseEntity<List<RoleModuleMapping>> getBymoduleId(@PathVariable int id){
 		List<RoleModuleMapping> roleModuleMapping = roleMappingService.getBymoduleId(id);
 		return new ResponseEntity<>(roleModuleMapping, HttpStatus.OK);
 	}
 	
+	/**
+     * Update a role module mapping's properties given its unique identifier.
+     *
+     * @param id the unique identifier of the role module mapping.
+     * @param updates a model containing the properties to be updated and their new values.
+     * @return the updated ROle Module Mapping object.
+     */
+	
 	@PutMapping("/update/{id}")
-	public String updateRoleMapping(@PathVariable int id, @RequestBody RoleModuleMappingModel roleModuleMappingModel){
-		String response = roleMappingService.updateRoleMapping(id, roleModuleMappingModel);
-		return response;
+	public ResponseEntity<ApiReturnResponse> updateRoleMapping(@PathVariable int id, @RequestBody RoleModuleMappingModel roleModuleMappingModel){
+		return roleMappingService.updateRoleMapping(id, roleModuleMappingModel);
 	}
+	
+	/**
+     * Delete a role module mapping by its unique identifier.
+     *
+     * @param id the unique identifier of the role module mapping.
+     * @return a ResponseEntity with no content status.
+     */
 	
 	@DeleteMapping("/delete/{id}")
-	public String deleteRoleMapping(@PathVariable int id) {
-		roleMappingService.deleteRoleMapping(id);
-		return "Deleted Successfully";
+	public ResponseEntity<ApiReturnResponse> deleteRoleMapping(@PathVariable int id) {
+		return roleMappingService.deleteRoleMapping(id);
 	}
 	
+	/**
+     * Update a role module mapping's properties given its unique identifier.
+     *
+     * @param id the unique identifier of the role module mapping.
+     * @param updates a map containing the properties to be updated and their new values.
+     * @return the updated ROle Module Mapping object.
+     */
+	
 	@PatchMapping("/edit/{id}")
-	public RoleModuleMapping update(@PathVariable int id, @RequestBody Map<String, Object> update) {
+	public ResponseEntity<ApiReturnResponse> update(@PathVariable int id, @RequestBody Map<String, Object> update) {
 		return roleMappingService.update(id, update);
 	}
 }
