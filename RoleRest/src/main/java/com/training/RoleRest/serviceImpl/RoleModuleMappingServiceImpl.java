@@ -22,10 +22,18 @@ import com.training.RoleRest.entity.Module;
 import com.training.RoleRest.entity.Role;
 import com.training.RoleRest.entity.RoleModuleMapping;
 import com.training.RoleRest.model.RoleModuleMappingModel;
+import com.training.RoleRest.repository.ModuleRepository;
 import com.training.RoleRest.repository.RoleModuleMappingRepository;
+import com.training.RoleRest.repository.RoleRepository;
+import com.training.RoleRest.response.RoleModuleMappingEntityApiResponse;
 import com.training.RoleRest.service.RoleModuleMappingService;
 
 import lombok.extern.slf4j.Slf4j;
+
+/**
+ * The RoleModuleMappingServiceImpl class provides an implementation of the RoleModuleMappingService interface,
+ * handling CRUD operations and other actions on RoleModuleMapping entities.
+ */
 
 @Service
 @Slf4j
@@ -34,48 +42,77 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 	@Autowired
 	RoleModuleMappingRepository roleModuleMappingRepository;
 	
+	@Autowired
+	RoleRepository roleRepository;
+	
+	@Autowired
+	ModuleRepository moduleRepository;
+	
 	ApiReturnResponse apiReturnResponse = new ApiReturnResponse();
 	
 	@Autowired
 	MessageProperties messageProperties;
 	
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public ResponseEntity<ApiReturnResponse> createRoleMapping(RoleModuleMappingModel roleModuleMappingModel) {
 		log.info("Entered into createRoleMapping method");
-		if(roleModuleMappingRepository.getRoleIdAndModuleId(roleModuleMappingModel.getModuleId(),roleModuleMappingModel.getRoleId()).isEmpty()) {
-		try {
-			RoleModuleMapping roleModuleMapping = new RoleModuleMapping();
-			BeanUtils.copyProperties(roleModuleMappingModel, roleModuleMapping);
-			Role role = new Role();
-			Module module = new Module();
-			role.setId(roleModuleMappingModel.getRoleId());
-			module.setId(roleModuleMappingModel.getModuleId());
-			roleModuleMapping.setRoleId(role);
-			roleModuleMapping.setModuleId(module);
-			roleModuleMappingRepository.save(roleModuleMapping);
-			log.debug("Saving RoleModuleMapping {} data to the database ",roleModuleMappingModel);
-			apiReturnResponse.setStatus(Boolean.TRUE);
-			apiReturnResponse.setMessage(messageProperties.getSUCCESS());
-			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
-			return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			log.warn("Role is not created");
+		if(roleRepository.findById(roleModuleMappingModel.getRoleId()).isEmpty()) {
 			apiReturnResponse.setStatus(Boolean.FALSE);
-			apiReturnResponse.setMessage(messageProperties.getERROR_CODE_500());
-			apiReturnResponse.setStatusCode(messageProperties.getINERNAL_SERVER_ERROR());
-			return new ResponseEntity<>(apiReturnResponse,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		}
-		else {
-			apiReturnResponse.setStatus(Boolean.FALSE);
-			apiReturnResponse.setMessage(messageProperties.getROLE_MODULE_MAPPING_ALREADY_EXISTS());
+			apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
 			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
 			return new ResponseEntity<>(apiReturnResponse,HttpStatus.NOT_ACCEPTABLE);
 		}
+		else if(moduleRepository.findById(roleModuleMappingModel.getRoleId()).isEmpty()) {
+			apiReturnResponse.setStatus(Boolean.FALSE);
+			apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
+			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			return new ResponseEntity<>(apiReturnResponse,HttpStatus.NOT_ACCEPTABLE);
+		}
+		else {
+			if(roleModuleMappingRepository.getRoleIdAndModuleId(roleModuleMappingModel.getModuleId(),roleModuleMappingModel.getRoleId()).isEmpty()) {
+				try {
+					RoleModuleMapping roleModuleMapping = new RoleModuleMapping();
+					BeanUtils.copyProperties(roleModuleMappingModel, roleModuleMapping);
+					Role role = new Role();
+					Module module = new Module();
+					role.setId(roleModuleMappingModel.getRoleId());
+					module.setId(roleModuleMappingModel.getModuleId());
+					roleModuleMapping.setRoleId(role);
+					roleModuleMapping.setModuleId(module);
+					roleModuleMappingRepository.save(roleModuleMapping);
+					log.debug("Saving RoleModuleMapping {} data to the database ",roleModuleMappingModel);
+					apiReturnResponse.setStatus(Boolean.TRUE);
+					apiReturnResponse.setMessage(messageProperties.getSUCCESS());
+					apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+					return new ResponseEntity<>(apiReturnResponse,HttpStatus.OK);
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+					log.warn("Role is not created");
+					apiReturnResponse.setStatus(Boolean.FALSE);
+					apiReturnResponse.setMessage(messageProperties.getERROR_CODE_500());
+					apiReturnResponse.setStatusCode(messageProperties.getINERNAL_SERVER_ERROR());
+					return new ResponseEntity<>(apiReturnResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+				}
+				}
+				else {
+					apiReturnResponse.setStatus(Boolean.FALSE);
+					apiReturnResponse.setMessage(messageProperties.getROLE_MODULE_MAPPING_ALREADY_EXISTS());
+					apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+					return new ResponseEntity<>(apiReturnResponse,HttpStatus.NOT_ACCEPTABLE);
+				}
+		}
+		
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public RoleModuleMappingApiResponse getAllRoleModuleMappings() {
 		
@@ -85,14 +122,20 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 			List<RoleModuleMapping> roleModuleMappingList = roleModuleMappingRepository.findAll();
 			if(roleModuleMappingList.isEmpty()) {
 				log.warn("No Module available");
+				roleModuleMappingApiResponse.setMessage(messageProperties.getNOT_FOUND());
+				roleModuleMappingApiResponse.setStatus(Boolean.FALSE);
+				roleModuleMappingApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				return roleModuleMappingApiResponse;
 			}
 			else {
 				log.debug("The displayed details:\n" + roleModuleMappingList);
 			}
 			log.info("The method getAllModule has been ended");
-			List<RoleModuleMappingModel> roleModuleMappingDtoList = new ArrayList<>();
+			List<RoleModuleMappingEntityApiResponse> roleModuleMappingDtoList = new ArrayList<>();
 			for(RoleModuleMapping roleModuleMapping : roleModuleMappingList) {
-				RoleModuleMappingModel roleModuleMappingModel= new RoleModuleMappingModel();
+				RoleModuleMappingEntityApiResponse roleModuleMappingModel= new RoleModuleMappingEntityApiResponse();
+				roleModuleMappingModel.setRole(roleModuleMapping.getRoleId().getName());
+				roleModuleMappingModel.setModule(roleModuleMapping.getModuleId().getModuleName());
 				BeanUtils.copyProperties(roleModuleMapping, roleModuleMappingModel);
 				roleModuleMappingDtoList.add(roleModuleMappingModel);
 				
@@ -100,7 +143,7 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 			roleModuleMappingApiResponse.setMessage(messageProperties.getSUCCESS());
 			roleModuleMappingApiResponse.setStatus(Boolean.TRUE);
 			roleModuleMappingApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
-			roleModuleMappingApiResponse.setRoleModuleMappingModelList(roleModuleMappingDtoList);
+			roleModuleMappingApiResponse.setRoleModuleMappingEntityApiResponseList(roleModuleMappingDtoList);
 		}
 		catch (Exception e) {
 			roleModuleMappingApiResponse.setMessage(messageProperties.getINERNAL_SERVER_ERROR());
@@ -111,6 +154,10 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 		return roleModuleMappingApiResponse;
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public ResponseEntity<ApiReturnResponse> updateRoleMapping(int id, RoleModuleMappingModel roleModuleMappingModel) {
 		log.info("Entered into updateRoleMapping method");
@@ -158,6 +205,10 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 		}
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public ResponseEntity<ApiReturnResponse> deleteRoleMapping(int id) {
 		log.info("Entered into deleteRoleMapping method");
@@ -189,6 +240,10 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 		}
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public RoleModuleMappingApiResponse getByRoleId(int id) {
 		RoleModuleMappingApiResponse roleModuleMappingApiResponse = new RoleModuleMappingApiResponse();
@@ -206,16 +261,18 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 				log.debug("The displayed details:\n" + optionalRoleModuleMapping);
 			}
 			log.info("The method getAllModule has been ended");
-			List<RoleModuleMappingModel> roleModuleMappingDtoList = new ArrayList<>();
+			List<RoleModuleMappingEntityApiResponse> roleModuleMappingDtoList = new ArrayList<>();
 			for(RoleModuleMapping roleModuleMapping : optionalRoleModuleMapping) {
-				RoleModuleMappingModel roleModuleMappingModel= new RoleModuleMappingModel();
+				RoleModuleMappingEntityApiResponse roleModuleMappingModel= new RoleModuleMappingEntityApiResponse();
+				roleModuleMappingModel.setRole(roleModuleMapping.getRoleId().getName());
+				roleModuleMappingModel.setModule(roleModuleMapping.getModuleId().getModuleName());
 				BeanUtils.copyProperties(roleModuleMapping, roleModuleMappingModel);
 				roleModuleMappingDtoList.add(roleModuleMappingModel);
 			}
 			roleModuleMappingApiResponse.setMessage(messageProperties.getSUCCESS());
 			roleModuleMappingApiResponse.setStatus(Boolean.TRUE);
 			roleModuleMappingApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
-			roleModuleMappingApiResponse.setRoleModuleMappingModelList(roleModuleMappingDtoList);
+			roleModuleMappingApiResponse.setRoleModuleMappingEntityApiResponseList(roleModuleMappingDtoList);
 		}
 		catch (Exception e) {
 			roleModuleMappingApiResponse.setMessage(messageProperties.getINERNAL_SERVER_ERROR());
@@ -225,6 +282,10 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 		return roleModuleMappingApiResponse;
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public RoleModuleMappingApiResponse getBymoduleId(int id) {
 		RoleModuleMappingApiResponse roleModuleMappingApiResponse = new RoleModuleMappingApiResponse();
@@ -242,16 +303,18 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 				log.debug("The displayed details:\n" + optionalRoleModuleMapping);
 			}
 			log.info("The method getAllModule has been ended");
-			List<RoleModuleMappingModel> roleModuleMappingDtoList = new ArrayList<>();
+			List<RoleModuleMappingEntityApiResponse> roleModuleMappingDtoList = new ArrayList<>();
 			for(RoleModuleMapping roleModuleMapping : optionalRoleModuleMapping) {
-				RoleModuleMappingModel roleModuleMappingModel= new RoleModuleMappingModel();
+				RoleModuleMappingEntityApiResponse roleModuleMappingModel= new RoleModuleMappingEntityApiResponse();
+				roleModuleMappingModel.setRole(roleModuleMapping.getRoleId().getName());
+				roleModuleMappingModel.setModule(roleModuleMapping.getModuleId().getModuleName());
 				BeanUtils.copyProperties(roleModuleMapping, roleModuleMappingModel);
 				roleModuleMappingDtoList.add(roleModuleMappingModel);
 			}
 			roleModuleMappingApiResponse.setMessage(messageProperties.getSUCCESS());
 			roleModuleMappingApiResponse.setStatus(Boolean.TRUE);
 			roleModuleMappingApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
-			roleModuleMappingApiResponse.setRoleModuleMappingModelList(roleModuleMappingDtoList);
+			roleModuleMappingApiResponse.setRoleModuleMappingEntityApiResponseList(roleModuleMappingDtoList);
 		}
 		catch (Exception e) {
 			roleModuleMappingApiResponse.setMessage(messageProperties.getINERNAL_SERVER_ERROR());
@@ -261,6 +324,10 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 		return roleModuleMappingApiResponse;
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public ResponseEntity<ApiReturnResponse> update(int id, Map<String, Object> update) {
 		log.info("Entered into update method");
@@ -274,24 +341,37 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 				case "roleId":
 					Role role = new Role();
 					role.setId((int) value);
-					if(roleModuleMappingRepository.getRoleIdAndModuleId(newModule.getModuleId().getId(),role.getId()).isEmpty()) {
-						newModule.setRoleId(role);
+					if(roleRepository.findById(role.getId()).isEmpty()) {
+						apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
+						throw new IllegalArgumentException();
 					}
 					else {
-                		apiReturnResponse.setMessage(messageProperties.getROLE_MODULE_MAPPING_ALREADY_EXISTS());
-            			throw new IllegalArgumentException();
-                	}
+						if(roleModuleMappingRepository.getRoleIdAndModuleId(newModule.getModuleId().getId(),role.getId()).isEmpty()) {
+							newModule.setRoleId(role);
+						}
+						else {
+	                		apiReturnResponse.setMessage(messageProperties.getROLE_MODULE_MAPPING_ALREADY_EXISTS());
+	            			throw new IllegalArgumentException();
+	                	}
+					}
+					
 					break;
 				case "moduleId":
 					Module module = new Module();
 					module.setId((int) value);
-					if(roleModuleMappingRepository.getRoleIdAndModuleId(module.getId(),newModule.getRoleId().getId()).isEmpty()) {
-						newModule.setModuleId(module);
+					if(moduleRepository.findById(module.getId()).isEmpty()) {
+						apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
+						throw new IllegalArgumentException();
 					}
 					else {
-                		apiReturnResponse.setMessage(messageProperties.getROLE_MODULE_MAPPING_ALREADY_EXISTS());
-            			throw new IllegalArgumentException();
-                	}
+						if(roleModuleMappingRepository.getRoleIdAndModuleId(module.getId(),newModule.getRoleId().getId()).isEmpty()) {
+							newModule.setModuleId(module);
+						}
+						else {
+	                		apiReturnResponse.setMessage(messageProperties.getROLE_MODULE_MAPPING_ALREADY_EXISTS());
+	            			throw new IllegalArgumentException();
+	                	}
+					}
 					break;
 				case "createe":
 					newModule.setCreatee((Boolean) value);

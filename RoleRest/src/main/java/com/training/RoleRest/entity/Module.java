@@ -17,6 +17,10 @@ import org.hibernate.annotations.Where;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * The Module class is a Entity class that replicates the database table
+ * related to module management in the application.
+ */
 
 @Entity
 @Table(name = "module_table")

@@ -2,8 +2,7 @@ package com.training.RoleRest.Response;
 
 import java.util.List;
 
-import com.training.RoleRest.dto.RoleModuleMappingDto;
-import com.training.RoleRest.model.RoleModuleMappingModel;
+import com.training.RoleRest.response.RoleModuleMappingEntityApiResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,5 +18,5 @@ public class RoleModuleMappingApiResponse extends ApiReturnResponse {
 
 	private static final long serialVersionUID = 1L;
 	
-	List<RoleModuleMappingModel> roleModuleMappingModelList;
+	List<RoleModuleMappingEntityApiResponse> roleModuleMappingEntityApiResponseList;
 }

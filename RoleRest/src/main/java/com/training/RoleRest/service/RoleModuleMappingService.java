@@ -1,17 +1,13 @@
 /*
- * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+O * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
  * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
  */
 package com.training.RoleRest.service;
 
-import java.util.List;
 import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
-
 import com.training.RoleRest.Response.ApiReturnResponse;
 import com.training.RoleRest.Response.RoleModuleMappingApiResponse;
-import com.training.RoleRest.entity.RoleModuleMapping;
 import com.training.RoleRest.model.RoleModuleMappingModel;
 
 /**

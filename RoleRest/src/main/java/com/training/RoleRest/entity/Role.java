@@ -17,6 +17,11 @@ import org.hibernate.annotations.Where;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * The Role class is a Entity class that replicates the database table
+ * related to Role management in the application.
+ */
+
 @Entity
 @Table(name = "role")
 @SQLDelete(sql = "UPDATE role SET is_deleted = true WHERE id=?")

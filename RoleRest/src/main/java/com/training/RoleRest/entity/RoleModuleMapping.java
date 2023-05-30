@@ -19,6 +19,11 @@ import org.hibernate.annotations.Where;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * The RoleModuleMapping class is a Entity class that replicates the database table
+ * related to RoleModuleMapping management in the application.
+ */
+
 @Entity
 @Table(name = "role_module_mapping_table")
 @SQLDelete(sql = "UPDATE role_module_mapping_table SET is_deleted = true WHERE id=?")

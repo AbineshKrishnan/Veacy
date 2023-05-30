@@ -25,8 +25,5 @@ public class ApiReturnResponse implements Serializable{
 	private String message;
 	
 	private String statusCode;
-	
-//	List<RoleModel> roleModelList;
-	
-	
+		
 }

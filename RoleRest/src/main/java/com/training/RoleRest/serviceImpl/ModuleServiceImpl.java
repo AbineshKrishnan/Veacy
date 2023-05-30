@@ -21,9 +21,15 @@ import com.training.RoleRest.Response.ModuleApiResponse;
 import com.training.RoleRest.entity.Module;
 import com.training.RoleRest.model.ModuleModel;
 import com.training.RoleRest.repository.ModuleRepository;
+import com.training.RoleRest.response.ModuleEntityApiResponse;
 import com.training.RoleRest.service.ModuleService;
 
 import lombok.extern.slf4j.Slf4j;
+
+/**
+ * The ModuleServiceImpl class provides an implementation of the ModuleService interface,
+ * handling CRUD operations and other actions on Module entities.
+ */
 
 @Service
 @Slf4j
@@ -37,6 +43,10 @@ public class ModuleServiceImpl implements ModuleService {
 	
 	@Autowired
 	MessageProperties messageProperties;
+	
+	/**
+     * {@inheritDoc}
+     */
 	
 	@Override
 	public ResponseEntity<ApiReturnResponse> createModule(ModuleModel moduleModel) {
@@ -69,6 +79,10 @@ public class ModuleServiceImpl implements ModuleService {
 		}
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public ModuleApiResponse getAllModule() {
 		ModuleApiResponse moduleApiResponse = new ModuleApiResponse();
@@ -77,22 +91,26 @@ public class ModuleServiceImpl implements ModuleService {
 			List<Module> moduleList = moduleRepository.findAll();
 			if(moduleList.isEmpty()) {
 				log.warn("No Module available");
+				moduleApiResponse.setMessage(messageProperties.getNOT_FOUND());
+				moduleApiResponse.setStatus(Boolean.FALSE);
+				moduleApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				return moduleApiResponse;
 			}
 			else {
 				log.debug("The displayed details:\n" + moduleList);
 			}
 			log.info("The method getAllModule has been ended");
 			
-			List<ModuleModel> moduleModelList = new ArrayList<>();
+			List<ModuleEntityApiResponse> moduleModelList = new ArrayList<>();
 			for(Module module : moduleList) {
-				ModuleModel moduleModel = new ModuleModel();
+				ModuleEntityApiResponse moduleModel = new ModuleEntityApiResponse();
 				BeanUtils.copyProperties(module, moduleModel);
 				moduleModelList.add(moduleModel);
 			}
 			moduleApiResponse.setMessage(messageProperties.getSUCCESS());
 			moduleApiResponse.setStatus(Boolean.TRUE);
 			moduleApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
-			moduleApiResponse.setModuleModelList(moduleModelList);
+			moduleApiResponse.setModuleEntityApiResponseList(moduleModelList);
 		}
 		catch (Exception e) {
 			moduleApiResponse.setMessage(messageProperties.getINERNAL_SERVER_ERROR());
@@ -102,6 +120,10 @@ public class ModuleServiceImpl implements ModuleService {
 		return moduleApiResponse;
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public ModuleApiResponse getModuleByName(String moduleName) {
 		ModuleApiResponse moduleApiResponse = new ModuleApiResponse();
@@ -111,19 +133,23 @@ public class ModuleServiceImpl implements ModuleService {
 			Module module = optionalModule.get();
 			if(optionalModule.isEmpty()) {
 				log.warn("No Module available");
+				moduleApiResponse.setMessage(messageProperties.getNOT_FOUND());
+				moduleApiResponse.setStatus(Boolean.FALSE);
+				moduleApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				return moduleApiResponse;
 			}
 			else {
 				log.debug("The displayed details:\n" + module);
 			}
 			log.info("The method getAllModule has been ended");
-			List<ModuleModel> moduleModelList = new ArrayList<>();
-			ModuleModel moduleModel = new ModuleModel();
+			List<ModuleEntityApiResponse> moduleModelList = new ArrayList<>();
+			ModuleEntityApiResponse moduleModel = new ModuleEntityApiResponse();
 			BeanUtils.copyProperties(module, moduleModel);
 			moduleModelList.add(moduleModel);
 			moduleApiResponse.setMessage(messageProperties.getSUCCESS());
 			moduleApiResponse.setStatus(Boolean.TRUE);
 			moduleApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
-			moduleApiResponse.setModuleModelList(moduleModelList);
+			moduleApiResponse.setModuleEntityApiResponseList(moduleModelList);
 		}
 		catch (Exception e) {
 			moduleApiResponse.setMessage(messageProperties.getINERNAL_SERVER_ERROR());
@@ -133,6 +159,10 @@ public class ModuleServiceImpl implements ModuleService {
 		return moduleApiResponse;
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public ResponseEntity<ApiReturnResponse> updateModule(int id, ModuleModel moduleModel) {
 		log.info("Entered into updateModule method");
@@ -175,6 +205,10 @@ public class ModuleServiceImpl implements ModuleService {
 		}
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public ResponseEntity<ApiReturnResponse> deleteModule(String moduleName) {
 		log.info("Entered into deleteModule method");
@@ -204,6 +238,10 @@ public class ModuleServiceImpl implements ModuleService {
 			return new ResponseEntity<>(apiReturnResponse,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	/**
+     * {@inheritDoc}
+     */
 	
 	@Override
 	public ResponseEntity<ApiReturnResponse> update(String name, Map<String, Object> update) {

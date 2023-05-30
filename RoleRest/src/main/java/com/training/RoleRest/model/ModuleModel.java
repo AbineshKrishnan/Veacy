@@ -18,8 +18,10 @@ public class ModuleModel {
 	
 	@NotNull
 	private String moduleName;
-	
+
 	@NotNull
-	private String description;	
-	
+	private String description;
+
+	private boolean isDeleted = false;
+	private boolean isActive = true;
 }

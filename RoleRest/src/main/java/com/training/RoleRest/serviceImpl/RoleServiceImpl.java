@@ -21,9 +21,15 @@ import com.training.RoleRest.Response.RoleApiResponse;
 import com.training.RoleRest.entity.Role;
 import com.training.RoleRest.model.RoleModel;
 import com.training.RoleRest.repository.RoleRepository;
+import com.training.RoleRest.response.RoleEntityApiResponse;
 import com.training.RoleRest.service.RoleService;
 
 import lombok.extern.slf4j.Slf4j;
+
+/**
+ * The RoleServiceImpl class provides an implementation of the RoleService interface,
+ * handling CRUD operations and other actions on Role entities.
+ */
 
 @Service
 @Slf4j
@@ -36,6 +42,10 @@ public class RoleServiceImpl implements RoleService {
 	
 	@Autowired
 	MessageProperties messageProperties;
+	
+	/**
+     * {@inheritDoc}
+     */
 	
 	@Override
 	public ResponseEntity<ApiReturnResponse> createRole(RoleModel roleModel) {
@@ -67,6 +77,10 @@ public class RoleServiceImpl implements RoleService {
 		}
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public RoleApiResponse getAllRole() {
 		
@@ -76,22 +90,26 @@ public class RoleServiceImpl implements RoleService {
 			List<Role> roleList = roleRepository.findAll();
 			if(roleList.isEmpty()) {
 				log.warn("No Module available");
+				response.setMessage(messageProperties.getNOT_FOUND());
+				response.setStatus(Boolean.FALSE);
+				response.setStatusCode(messageProperties.getERROR_CODE_200());
+				return response;
 			}
 			else {
 				log.debug("The displayed details:\n" + roleList);
 			}
 			log.info("The method getAllModule has been ended");
 			
-			List<RoleModel> roleModelList = new ArrayList<>();
+			List<RoleEntityApiResponse> roleModelList = new ArrayList<>();
 			for(Role role : roleList) {
-				RoleModel roleModel = new RoleModel();
+				RoleEntityApiResponse roleModel = new RoleEntityApiResponse();
 				BeanUtils.copyProperties(role, roleModel);
 				roleModelList.add(roleModel);
 			}
 			response.setMessage(messageProperties.getSUCCESS());
 			response.setStatus(Boolean.TRUE);
 			response.setStatusCode(messageProperties.getERROR_CODE_200());
-			response.setRoleModelList(roleModelList);
+			response.setRoleEntityApiResponseList(roleModelList);
 		} catch (Exception e) {
 			response.setMessage(messageProperties.getINERNAL_SERVER_ERROR());
 			response.setStatus(Boolean.FALSE);
@@ -101,6 +119,10 @@ public class RoleServiceImpl implements RoleService {
 		return response;
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public RoleApiResponse getRoleByName(String name) {
 		RoleApiResponse roleApiResponse = new RoleApiResponse();
@@ -110,19 +132,23 @@ public class RoleServiceImpl implements RoleService {
 			Role role = optionalRole.get();
 			if(optionalRole.isEmpty()) {
 				log.warn("No Role available");
+				roleApiResponse.setMessage(messageProperties.getNOT_FOUND());
+				roleApiResponse.setStatus(Boolean.FALSE);
+				roleApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				return roleApiResponse;
 			}
 			else {
 				log.debug("The displayed details:\n" + role);
 			}
 			log.info("The method getAllModule has been ended");
-			List<RoleModel> roleModelList = new ArrayList<>();
-			RoleModel roleModel = new RoleModel();
+			List<RoleEntityApiResponse> roleModelList = new ArrayList<>();
+			RoleEntityApiResponse roleModel = new RoleEntityApiResponse();
 			BeanUtils.copyProperties(role, roleModel);
 			roleModelList.add(roleModel);
 			roleApiResponse.setMessage(messageProperties.getSUCCESS());
 			roleApiResponse.setStatus(Boolean.TRUE);
 			roleApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
-			roleApiResponse.setRoleModelList(roleModelList);
+			roleApiResponse.setRoleEntityApiResponseList(roleModelList);
 		}
 		catch (Exception e) {
 			roleApiResponse.setMessage(messageProperties.getINERNAL_SERVER_ERROR());
@@ -132,6 +158,10 @@ public class RoleServiceImpl implements RoleService {
 		return roleApiResponse;
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public ResponseEntity<ApiReturnResponse> updateRole(String name, RoleModel roleModel) {
 		log.info("Entered into updateRole method");
@@ -177,6 +207,10 @@ public class RoleServiceImpl implements RoleService {
 		}
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public ResponseEntity<ApiReturnResponse> deleteRole(String name) {
 		log.info("Entered into deleteRole method");
@@ -209,6 +243,10 @@ public class RoleServiceImpl implements RoleService {
 		}
 	}
 
+	/**
+     * {@inheritDoc}
+     */
+	
 	@Override
 	public ResponseEntity<ApiReturnResponse> update(String name, Map<String, Object> updates) {
 		log.info("Entered into updateRole method");

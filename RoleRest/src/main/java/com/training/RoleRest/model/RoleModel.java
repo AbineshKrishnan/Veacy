@@ -11,6 +11,9 @@ import lombok.Setter;
 @Setter
 public class RoleModel {
 	
-	 private String name;
-	 private String description;
+	private String name;
+	private String description;
+	private boolean isInvitee;
+	private boolean isDeleted;
+	private boolean isActive;
 }

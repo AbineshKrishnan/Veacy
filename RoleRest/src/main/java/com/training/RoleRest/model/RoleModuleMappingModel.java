@@ -28,4 +28,5 @@ public class RoleModuleMappingModel {
 	
 	private boolean deletee;
 	
+	private boolean isDeleted = false;
 }
