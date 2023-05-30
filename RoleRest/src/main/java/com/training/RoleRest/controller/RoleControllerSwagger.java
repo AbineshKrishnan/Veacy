@@ -4,15 +4,14 @@
  */
 package com.training.RoleRest.controller;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.training.RoleRest.Response.ApiReturnResponse;
+import com.training.RoleRest.Response.RoleApiResponse;
 import com.training.RoleRest.entity.Role;
 import com.training.RoleRest.model.RoleModel;
 
@@ -33,12 +32,12 @@ public interface RoleControllerSwagger {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Role.class))})})
-	public ResponseEntity<List<Role>> getAllRole();
+	public ApiReturnResponse getAllRole();
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Role.class))})})
-	public ResponseEntity<Optional<Role>> getRoleByName(@PathVariable("name") String name);
+	public RoleApiResponse getRoleByName(@PathVariable("name") String name);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,

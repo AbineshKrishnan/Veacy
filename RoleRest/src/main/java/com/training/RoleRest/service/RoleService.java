@@ -4,27 +4,64 @@
  */
 package com.training.RoleRest.service;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.http.ResponseEntity;
-
 import com.training.RoleRest.Response.ApiReturnResponse;
+import com.training.RoleRest.Response.RoleApiResponse;
 import com.training.RoleRest.entity.Role;
 import com.training.RoleRest.model.RoleModel;
 
+/**
+ * The RoleService interface provides methods for performing CRUD operations
+ * and other actions on ROle entities.
+ */
+
 public interface RoleService {
+	
+	/**
+     * Save a new role or update an existing one in the data source.
+     *
+     * @param roleModel the role object to be saved or updated.
+     * @return the saved or updated Role object.
+     */
 	
 	public ResponseEntity<ApiReturnResponse> createRole(RoleModel roleModel);
 
-	public List<Role> getAllRole();
+	/**
+     * Retrieve all roles from the data source.
+     *
+     * @return a list of Role objects.
+     */
+	
+	public ApiReturnResponse  getAllRole();
 
-	public Optional<Role> getRoleByName(String name);
+	/**
+     * Retrieve a role by its unique name.
+     *
+     * @param name the unique name of the role.
+     * @return an Optional object containing the Role if found, or empty if not found.
+     */
+	
+	public RoleApiResponse getRoleByName(String name);
 
 	public ResponseEntity<ApiReturnResponse> updateRole(String name, RoleModel roleModel);
 
+	/**
+     * Delete a role from the data source by its unique name.
+     *
+     * @param name the unique name of the role.
+     */
+	
 	public ResponseEntity<ApiReturnResponse> deleteRole(String name);
 
+	/**
+     * Update a role's properties given its unique name and a map of the updates.
+     *
+     * @param name the unique name of the role.
+     * @param updates a map containing the properties to be updated and their new values.
+     * @return the updated Role object.
+     */
+	
 	public ResponseEntity<ApiReturnResponse> update(String name, Map<String, Object> updates);
 }

@@ -4,11 +4,9 @@
  */
 package com.training.RoleRest.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.RoleRest.Response.ApiReturnResponse;
-import com.training.RoleRest.entity.RoleModuleMapping;
+import com.training.RoleRest.Response.RoleModuleMappingApiResponse;
 import com.training.RoleRest.model.RoleModuleMappingModel;
 import com.training.RoleRest.service.RoleModuleMappingService;
 
@@ -56,9 +54,8 @@ public class RoleModuleMappingController implements RoleModuleMappingControllerS
      */
 	
 	@GetMapping("/getAll")
-	public ResponseEntity<List<RoleModuleMapping>> getAllRoleModuleMappings(){
-		List<RoleModuleMapping> roleModuleMappings = roleMappingService.getAllRoleModuleMappings();
-		return new ResponseEntity<>(roleModuleMappings, HttpStatus.OK);
+	public RoleModuleMappingApiResponse getAllRoleModuleMappings(){
+		return roleMappingService.getAllRoleModuleMappings();
 	}
 	
 	/**
@@ -69,9 +66,8 @@ public class RoleModuleMappingController implements RoleModuleMappingControllerS
      */
 	
 	@GetMapping("/getbyroleid/{id}")
-	public ResponseEntity<List<RoleModuleMapping>> getByRoleId(@PathVariable int id){
-		List<RoleModuleMapping> roleModuleMapping = roleMappingService.getByRoleId(id);
-		return new ResponseEntity<>(roleModuleMapping, HttpStatus.OK);
+	public RoleModuleMappingApiResponse getByRoleId(@PathVariable int id){
+		return roleMappingService.getByRoleId(id);
 	}
 	
 	/**
@@ -82,9 +78,8 @@ public class RoleModuleMappingController implements RoleModuleMappingControllerS
      */
 	
 	@GetMapping("/getbymoduleid/{id}")
-	public ResponseEntity<List<RoleModuleMapping>> getBymoduleId(@PathVariable int id){
-		List<RoleModuleMapping> roleModuleMapping = roleMappingService.getBymoduleId(id);
-		return new ResponseEntity<>(roleModuleMapping, HttpStatus.OK);
+	public RoleModuleMappingApiResponse getBymoduleId(@PathVariable int id){
+		return roleMappingService.getBymoduleId(id);
 	}
 	
 	/**

@@ -5,7 +5,6 @@
 package com.training.RoleRest.Response;
 
 import java.io.Serializable;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,4 +25,8 @@ public class ApiReturnResponse implements Serializable{
 	private String message;
 	
 	private String statusCode;
+	
+//	List<RoleModel> roleModelList;
+	
+	
 }

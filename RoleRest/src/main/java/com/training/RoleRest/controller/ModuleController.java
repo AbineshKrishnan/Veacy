@@ -4,11 +4,9 @@
  */
 package com.training.RoleRest.controller;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +17,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.training.RoleRest.Response.ApiReturnResponse;
-import com.training.RoleRest.entity.Module;
+import com.training.RoleRest.Response.ModuleApiResponse;
 import com.training.RoleRest.model.ModuleModel;
 import com.training.RoleRest.service.ModuleService;
 
@@ -52,13 +51,12 @@ public class ModuleController implements ModuleControllerSwagger{
 	/**
      * Get all modules.
      *
-     * @return a ResponseEntity containing a list of all Module objects.
+     * @return a ResponseEntity containing of all Module objects.
      */
 	
 	@GetMapping
-	public ResponseEntity<List<Module>> getAllModule(){
-		List<Module> module = moduleService.getAllModule();
-		return new ResponseEntity<>(module, HttpStatus.OK);
+	public ModuleApiResponse getAllModule(){
+		return moduleService.getAllModule();
 	}
 	
 	/**
@@ -69,14 +67,8 @@ public class ModuleController implements ModuleControllerSwagger{
      */
 	
 	@GetMapping("/{moduleName}")
-	public ResponseEntity<Optional<Module>> getModuleByName(@PathVariable("moduleName") String ModuleName){
-		Optional<Module> module = moduleService.getModuleByName(ModuleName);
-		if(module !=null) {
-			return ResponseEntity.ok(module);
-		}
-		else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
+	public ModuleApiResponse getModuleByName(@PathVariable("moduleName") String ModuleName){
+		return moduleService.getModuleByName(ModuleName);
 	}
 	
 	/**

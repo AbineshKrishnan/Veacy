@@ -4,11 +4,9 @@
  */
 package com.training.RoleRest.controller;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.RoleRest.Response.ApiReturnResponse;
-import com.training.RoleRest.entity.Role;
+import com.training.RoleRest.Response.RoleApiResponse;
 import com.training.RoleRest.model.RoleModel;
 import com.training.RoleRest.service.RoleService;
 
@@ -56,9 +54,8 @@ public class RoleController implements RoleControllerSwagger{
      */
 	
 	@GetMapping
-	public ResponseEntity<List<Role>> getAllRole(){
-		List<Role> role = roleService.getAllRole();
-		return new ResponseEntity<>(role, HttpStatus.OK);
+	public ApiReturnResponse getAllRole(){
+		return roleService.getAllRole();
 	}
 	
 	/**
@@ -69,14 +66,8 @@ public class RoleController implements RoleControllerSwagger{
      */
 	
 	@GetMapping("/{name}")
-	public ResponseEntity<Optional<Role>> getRoleByName(@PathVariable("name") String name){
-		Optional<Role> role = roleService.getRoleByName(name);
-		if(role !=null) {
-			return ResponseEntity.ok(role);
-		}
-		else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
+	public RoleApiResponse getRoleByName(@PathVariable("name") String name){
+		return roleService.getRoleByName(name);
 	}
 	
 	/**

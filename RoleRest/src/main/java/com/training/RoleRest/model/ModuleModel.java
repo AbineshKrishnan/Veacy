@@ -20,11 +20,6 @@ public class ModuleModel {
 	private String moduleName;
 	
 	@NotNull
-	private String description;
-	
-	private boolean isDeleted = false;
-	private boolean isActive = true;
-	
-	
+	private String description;	
 	
 }

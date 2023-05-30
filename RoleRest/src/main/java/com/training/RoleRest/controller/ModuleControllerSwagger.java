@@ -4,15 +4,17 @@
  */
 package com.training.RoleRest.controller;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.training.RoleRest.entity.Module;
+
 import com.training.RoleRest.Response.ApiReturnResponse;
+import com.training.RoleRest.Response.ModuleApiResponse;
+import com.training.RoleRest.entity.Module;
 import com.training.RoleRest.model.ModuleModel;
+
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -30,12 +32,12 @@ public interface ModuleControllerSwagger {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Module.class))})})
-	public ResponseEntity<List<Module>> getAllModule();
+	public ModuleApiResponse getAllModule();
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Module.class))})})
-	public ResponseEntity<Optional<Module>> getModuleByName(@PathVariable("moduleName") String ModuleName);
+	public ModuleApiResponse getModuleByName(@PathVariable("moduleName") String ModuleName);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,

@@ -13,6 +13,4 @@ public class RoleModel {
 	
 	 private String name;
 	 private String description;
-	 private boolean isInvitee;
-	 private boolean isActive;
 }
