@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -80,19 +79,6 @@ public class RoleModuleMappingController implements RoleModuleMappingControllerS
 	@GetMapping("/getbymoduleid/{id}")
 	public RoleModuleMappingApiResponse getBymoduleId(@PathVariable int id){
 		return roleMappingService.getBymoduleId(id);
-	}
-	
-	/**
-     * Update a role module mapping's properties given its unique identifier.
-     *
-     * @param id the unique identifier of the role module mapping.
-     * @param updates a model containing the properties to be updated and their new values.
-     * @return the updated ROle Module Mapping object.
-     */
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<ApiReturnResponse> updateRoleMapping(@PathVariable int id, @RequestBody RoleModuleMappingModel roleModuleMappingModel){
-		return roleMappingService.updateRoleMapping(id, roleModuleMappingModel);
 	}
 	
 	/**

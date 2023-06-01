@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,19 +67,6 @@ public class RoleController implements RoleControllerSwagger{
 	@GetMapping("/{name}")
 	public RoleApiResponse getRoleByName(@PathVariable("name") String name){
 		return roleService.getRoleByName(name);
-	}
-	
-	/**
-     * Update a role's properties given its unique name.
-     *
-     * @param name the unique name of the user.
-     * @param updates a model containing the properties to be updated and their new values.
-     * @return the updated Role object.
-     */
-	
-	@PutMapping("/{name}")
-	public ResponseEntity<ApiReturnResponse> updateRole(@PathVariable String name, @RequestBody RoleModel roleModel){
-		return roleService.updateRole(name, roleModel);
 	}
 	
 	/**

@@ -42,11 +42,6 @@ public interface RoleControllerSwagger {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Role.class))})})
-	public ResponseEntity<ApiReturnResponse> updateRole(@PathVariable String name, @RequestBody RoleModel roleModel);
-	
-	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
-			content = {@Content(mediaType = "application/json" ,
-			schema = @Schema(implementation = Role.class))})})
 	public ResponseEntity<ApiReturnResponse> deleteRole(@PathVariable String name);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,

@@ -35,8 +35,6 @@ public interface RoleModuleMappingService {
 	
 	RoleModuleMappingApiResponse getAllRoleModuleMappings();
 
-	ResponseEntity<ApiReturnResponse> updateRoleMapping(int id, RoleModuleMappingModel roleModuleMappingModel);
-
 	/**
      * Delete a role module mapping from the data source by its unique identifier.
      *

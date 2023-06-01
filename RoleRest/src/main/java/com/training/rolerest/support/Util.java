@@ -6,6 +6,11 @@ package com.training.rolerest.support;
 
 import org.springframework.stereotype.Service;
 
+import com.training.rolerest.apiresponse.ApiReturnResponse;
+import com.training.rolerest.apiresponse.ModuleApiResponse;
+import com.training.rolerest.apiresponse.RoleApiResponse;
+import com.training.rolerest.apiresponse.RoleModuleMappingApiResponse;
+
 /**
  * The RoleServiceImpl class provides an implementation of the RoleService
  * interface, handling CRUD operations and other actions on Role entities.
@@ -15,13 +20,37 @@ import org.springframework.stereotype.Service;
 //@Slf4j
 public class Util {
 
-//	RoleApiResponse apiResponse;
-//
-//	public RoleApiResponse setResponseMessage(String message, boolean status, String code) {
-//		apiResponse.setMessage(message);
-//		apiResponse.setStatus(status);
-//		apiResponse.setStatusCode(code);
-//		return apiResponse;
-//	}
+	RoleApiResponse roleApiResponse = new RoleApiResponse();
+	ModuleApiResponse moduleApiResponse = new ModuleApiResponse();
+	RoleModuleMappingApiResponse roleModuleMappingApiResponse = new RoleModuleMappingApiResponse();
+	ApiReturnResponse apiReturnResponse = new ApiReturnResponse(); 
+
+	public RoleApiResponse setRoleApiResponseMessage(String message, boolean status, String code) {
+		roleApiResponse.setMessage(message);
+		roleApiResponse.setStatus(status);
+		roleApiResponse.setStatusCode(code);
+		return roleApiResponse;
+	}
+	
+	public ModuleApiResponse setModuleApiResponseMessage(String message, boolean status, String code) {
+		moduleApiResponse.setMessage(message);
+		moduleApiResponse.setStatus(status);
+		moduleApiResponse.setStatusCode(code);
+		return moduleApiResponse;
+	}
+	
+	public RoleModuleMappingApiResponse setRoleModuleMappingApiResponseMessage(String message, boolean status, String code) {
+		roleModuleMappingApiResponse.setMessage(message);
+		roleModuleMappingApiResponse.setStatus(status);
+		roleModuleMappingApiResponse.setStatusCode(code);
+		return roleModuleMappingApiResponse;
+	}
+	
+	public ApiReturnResponse setApiReturnResponseMessage(String message, boolean status, String code) {
+		apiReturnResponse.setMessage(message);
+		apiReturnResponse.setStatus(status);
+		apiReturnResponse.setStatusCode(code);
+		return apiReturnResponse;
+	}
 
 }

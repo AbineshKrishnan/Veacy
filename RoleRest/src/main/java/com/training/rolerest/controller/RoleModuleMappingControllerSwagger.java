@@ -43,12 +43,7 @@ public interface RoleModuleMappingControllerSwagger {
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = RoleModuleMapping.class))})})
 	public RoleModuleMappingApiResponse getBymoduleId(@PathVariable int id);
-	
-	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
-			content = {@Content(mediaType = "application/json" ,
-			schema = @Schema(implementation = RoleModuleMapping.class))})})
-	public ResponseEntity<ApiReturnResponse> updateRoleMapping(@PathVariable int id, @RequestBody RoleModuleMappingModel roleModuleMappingModel);
-	
+		
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = RoleModuleMapping.class))})})

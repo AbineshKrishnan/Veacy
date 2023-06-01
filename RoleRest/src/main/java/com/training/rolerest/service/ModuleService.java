@@ -43,8 +43,6 @@ public interface ModuleService {
 	
 	public ModuleApiResponse getModuleByName(String moduleName);
 
-	public ResponseEntity<ApiReturnResponse> updateModule(int id, ModuleModel moduleModel);
-
 	/**
      * Delete a module from the data source by its unique name.
      *

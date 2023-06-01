@@ -42,11 +42,6 @@ public interface ModuleControllerSwagger {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Module.class))})})
-	public ResponseEntity<ApiReturnResponse> updateModule(@PathVariable int id,@RequestBody ModuleModel moduleModel);
-	
-	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
-			content = {@Content(mediaType = "application/json" ,
-			schema = @Schema(implementation = Module.class))})})
 	public ResponseEntity<ApiReturnResponse> deleteModule(@PathVariable String moduleName);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,

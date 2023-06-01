@@ -45,8 +45,6 @@ public interface RoleService {
 	
 	public RoleApiResponse getRoleByName(String name);
 
-	public ResponseEntity<ApiReturnResponse> updateRole(String name, RoleModel roleModel);
-
 	/**
      * Delete a role from the data source by its unique name.
      *

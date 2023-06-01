@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,19 +68,6 @@ public class ModuleController implements ModuleControllerSwagger{
 	@GetMapping("/{moduleName}")
 	public ModuleApiResponse getModuleByName(@PathVariable("moduleName") String ModuleName){
 		return moduleService.getModuleByName(ModuleName);
-	}
-	
-	/**
-     * Update a module's properties given its unique identifier.
-     *
-     * @param id the unique identifier of the module.
-     * @param updates a model containing the properties to be updated and their new values.
-     * @return the updated Module object.
-     */
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<ApiReturnResponse> updateModule(@PathVariable int id,@RequestBody ModuleModel moduleModel){
-		return moduleService.updateModule(id,moduleModel);
 	}
 	
 	/**
