@@ -12,8 +12,6 @@ import lombok.Setter;
 @Setter
 public class ModuleEntityApiResponse {
 	
-//	List<ModuleModel> moduleModelList;
-	
 	private int id;
 	
 	private String moduleName;
