@@ -1,109 +1,117 @@
-02-06-2023 | 10:04:27.635 | INFO  | 55 | logStarting | c.t.r.RoleRestApplication | Starting RoleRestApplication using Java 17.0.6 on PI-IN-L42 with PID 520229 (/home/User-L42/Desktop/GIT/Veacy/RoleRest/target/classes started by User-L42 in /home/User-L42/Desktop/GIT/Veacy/RoleRest)
-02-06-2023 | 10:04:27.642 | INFO  | 631 | logStartupProfileInfo | c.t.r.RoleRestApplication | No active profile set, falling back to 1 default profile: "default"
-02-06-2023 | 10:04:27.729 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-02-06-2023 | 10:04:27.729 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-02-06-2023 | 10:04:28.541 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-02-06-2023 | 10:04:28.604 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 53 ms. Found 3 JPA repository interfaces.
-02-06-2023 | 10:04:29.250 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8090 (http)
-02-06-2023 | 10:04:29.277 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
-02-06-2023 | 10:04:29.277 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
-02-06-2023 | 10:04:29.346 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
-02-06-2023 | 10:04:29.346 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 1616 ms
-02-06-2023 | 10:04:29.520 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
-02-06-2023 | 10:04:29.564 | INFO  | 44 | logVersion | o.h.Version | HHH000412: Hibernate ORM core version 5.6.15.Final
-02-06-2023 | 10:04:29.697 | INFO  | 56 | <clinit> | o.h.a.c.Version | HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-02-06-2023 | 10:04:29.804 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Starting...
-02-06-2023 | 10:04:30.122 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Start completed.
-02-06-2023 | 10:04:30.150 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-02-06-2023 | 10:04:31.830 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-02-06-2023 | 10:04:31.867 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
-02-06-2023 | 10:04:32.387 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-02-06-2023 | 10:04:33.106 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
-02-06-2023 | 10:04:33.147 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8090 (http) with context path ''
-02-06-2023 | 10:04:33.160 | INFO  | 61 | logStarted | c.t.r.RoleRestApplication | Started RoleRestApplication in 5.971 seconds (JVM running for 6.847)
-02-06-2023 | 10:04:41.547 | INFO  | 211 | onApplicationEvent | o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener | Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
-02-06-2023 | 10:04:41.567 | INFO  | 173 | log | o.a.c.c.StandardService | Stopping service [Tomcat]
-02-06-2023 | 10:04:41.579 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
-02-06-2023 | 10:04:41.584 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-1 - Shutdown initiated...
-02-06-2023 | 10:04:41.599 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-1 - Shutdown completed.
-02-06-2023 | 10:04:41.786 | INFO  | 55 | logStarting | c.t.r.RoleRestApplication | Starting RoleRestApplication using Java 17.0.6 on PI-IN-L42 with PID 520229 (/home/User-L42/Desktop/GIT/Veacy/RoleRest/target/classes started by User-L42 in /home/User-L42/Desktop/GIT/Veacy/RoleRest)
-02-06-2023 | 10:04:41.787 | INFO  | 631 | logStartupProfileInfo | c.t.r.RoleRestApplication | No active profile set, falling back to 1 default profile: "default"
-02-06-2023 | 10:04:42.005 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-02-06-2023 | 10:04:42.019 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 13 ms. Found 3 JPA repository interfaces.
-02-06-2023 | 10:04:42.116 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8090 (http)
-02-06-2023 | 10:04:42.117 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
-02-06-2023 | 10:04:42.117 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
-02-06-2023 | 10:04:42.128 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
-02-06-2023 | 10:04:42.128 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 338 ms
-02-06-2023 | 10:04:42.183 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
-02-06-2023 | 10:04:42.188 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-2 - Starting...
-02-06-2023 | 10:04:42.205 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-2 - Start completed.
-02-06-2023 | 10:04:42.206 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-02-06-2023 | 10:04:42.368 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-02-06-2023 | 10:04:42.368 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
-02-06-2023 | 10:04:42.588 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-02-06-2023 | 10:04:42.962 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
-02-06-2023 | 10:04:42.983 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8090 (http) with context path ''
-02-06-2023 | 10:04:42.990 | INFO  | 61 | logStarted | c.t.r.RoleRestApplication | Started RoleRestApplication in 1.255 seconds (JVM running for 16.677)
-02-06-2023 | 10:04:42.992 | INFO  | 63 | onApplicationEvent | o.s.b.d.a.ConditionEvaluationDeltaLoggingListener | Condition evaluation unchanged
-02-06-2023 | 10:05:04.634 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
-02-06-2023 | 10:05:04.634 | INFO  | 525 | initServletBean | o.s.w.s.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
-02-06-2023 | 10:05:04.636 | INFO  | 547 | initServletBean | o.s.w.s.DispatcherServlet | Completed initialization in 2 ms
-02-06-2023 | 10:05:04.754 | INFO  | 57 | createModule | c.t.r.s.ModuleServiceImpl | Entered into createModule method
-02-06-2023 | 10:05:06.187 | INFO  | 57 | createModule | c.t.r.s.ModuleServiceImpl | Entered into createModule method
-02-06-2023 | 10:05:10.630 | INFO  | 57 | createModule | c.t.r.s.ModuleServiceImpl | Entered into createModule method
-02-06-2023 | 10:05:10.633 | WARN  | 80 | createModule | c.t.r.s.ModuleServiceImpl | Module is not created
-02-06-2023 | 10:05:15.346 | INFO  | 57 | createModule | c.t.r.s.ModuleServiceImpl | Entered into createModule method
-02-06-2023 | 10:05:15.347 | WARN  | 80 | createModule | c.t.r.s.ModuleServiceImpl | Module is not created
-02-06-2023 | 10:05:32.675 | INFO  | 57 | createModule | c.t.r.s.ModuleServiceImpl | Entered into createModule method
-02-06-2023 | 10:05:44.503 | INFO  | 57 | createModule | c.t.r.s.ModuleServiceImpl | Entered into createModule method
-02-06-2023 | 10:05:53.103 | INFO  | 57 | createRole | c.t.r.s.RoleServiceImpl | Entered into createRole method
-02-06-2023 | 10:05:53.109 | INFO  | 62 | createRole | c.t.r.s.RoleServiceImpl | Validated the input data
-02-06-2023 | 10:05:59.045 | INFO  | 57 | createRole | c.t.r.s.RoleServiceImpl | Entered into createRole method
-02-06-2023 | 10:05:59.045 | WARN  | 84 | createRole | c.t.r.s.RoleServiceImpl | Invalid Attribute or Field Exception
-02-06-2023 | 10:05:59.069 | WARN  | 208 | logException | o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver | Resolved [com.training.rolerest.exception.InvalidAttributeOrFieldException: Invalid Attribute or Field Exception]
-02-06-2023 | 10:06:28.964 | INFO  | 57 | createRole | c.t.r.s.RoleServiceImpl | Entered into createRole method
-02-06-2023 | 10:06:28.967 | WARN  | 72 | createRole | c.t.r.s.RoleServiceImpl | Role already exists
-02-06-2023 | 10:06:30.207 | INFO  | 57 | createRole | c.t.r.s.RoleServiceImpl | Entered into createRole method
-02-06-2023 | 10:06:30.211 | WARN  | 72 | createRole | c.t.r.s.RoleServiceImpl | Role already exists
-02-06-2023 | 10:06:41.734 | INFO  | 57 | createRole | c.t.r.s.RoleServiceImpl | Entered into createRole method
-02-06-2023 | 10:06:41.736 | INFO  | 62 | createRole | c.t.r.s.RoleServiceImpl | Validated the input data
-02-06-2023 | 10:07:09.298 | INFO  | 57 | createRole | c.t.r.s.RoleServiceImpl | Entered into createRole method
-02-06-2023 | 10:07:09.303 | WARN  | 72 | createRole | c.t.r.s.RoleServiceImpl | Role already exists
-02-06-2023 | 10:08:04.026 | INFO  | 57 | createRole | c.t.r.s.RoleServiceImpl | Entered into createRole method
-02-06-2023 | 10:08:04.029 | INFO  | 62 | createRole | c.t.r.s.RoleServiceImpl | Validated the input data
-02-06-2023 | 10:08:13.341 | INFO  | 57 | createRole | c.t.r.s.RoleServiceImpl | Entered into createRole method
-02-06-2023 | 10:08:13.344 | WARN  | 72 | createRole | c.t.r.s.RoleServiceImpl | Role already exists
-02-06-2023 | 10:08:40.694 | INFO  | 116 | getAllRole | c.t.r.s.RoleServiceImpl | Fetched the data from the data base
-02-06-2023 | 10:08:40.695 | INFO  | 124 | getAllRole | c.t.r.s.RoleServiceImpl | The method getAllModule has been ended
-02-06-2023 | 10:08:50.058 | INFO  | 139 | getModuleByName | c.t.r.s.ModuleServiceImpl | The method getAllModule has been ended
-02-06-2023 | 10:08:57.636 | ERROR | 155 | getRoleByName | c.t.r.s.RoleServiceImpl | Can't get the Role
-02-06-2023 | 10:08:57.636 | INFO  | 159 | getRoleByName | c.t.r.s.RoleServiceImpl | The method getRoleByName has been ended
-02-06-2023 | 10:09:00.018 | INFO  | 159 | getRoleByName | c.t.r.s.RoleServiceImpl | The method getRoleByName has been ended
-02-06-2023 | 10:09:30.446 | INFO  | 160 | deleteModule | c.t.r.s.ModuleServiceImpl | Entered into deleteModule method
-02-06-2023 | 10:09:33.258 | INFO  | 160 | deleteModule | c.t.r.s.ModuleServiceImpl | Entered into deleteModule method
-02-06-2023 | 10:09:35.254 | INFO  | 160 | deleteModule | c.t.r.s.ModuleServiceImpl | Entered into deleteModule method
-02-06-2023 | 10:09:42.307 | INFO  | 169 | deleteRole | c.t.r.s.RoleServiceImpl | Entered into deleteRole method
-02-06-2023 | 10:09:44.585 | INFO  | 169 | deleteRole | c.t.r.s.RoleServiceImpl | Entered into deleteRole method
-02-06-2023 | 10:09:54.364 | INFO  | 67 | createRoleMapping | c.t.r.s.RoleModuleMappingServiceImpl | Entered into createRoleMapping method
-02-06-2023 | 10:09:57.380 | INFO  | 67 | createRoleMapping | c.t.r.s.RoleModuleMappingServiceImpl | Entered into createRoleMapping method
-02-06-2023 | 10:10:02.529 | INFO  | 67 | createRoleMapping | c.t.r.s.RoleModuleMappingServiceImpl | Entered into createRoleMapping method
-02-06-2023 | 10:10:05.763 | INFO  | 67 | createRoleMapping | c.t.r.s.RoleModuleMappingServiceImpl | Entered into createRoleMapping method
-02-06-2023 | 10:10:11.244 | INFO  | 129 | getAllRoleModuleMappings | c.t.r.s.RoleModuleMappingServiceImpl | The method getAllModule has been ended
-02-06-2023 | 10:10:27.481 | INFO  | 198 | getByRoleId | c.t.r.s.RoleModuleMappingServiceImpl | The method getAllModule has been ended
-02-06-2023 | 10:10:33.196 | WARN  | 190 | getByRoleId | c.t.r.s.RoleModuleMappingServiceImpl | No Module available
-02-06-2023 | 10:10:39.298 | INFO  | 198 | getByRoleId | c.t.r.s.RoleModuleMappingServiceImpl | The method getAllModule has been ended
-02-06-2023 | 10:10:47.227 | WARN  | 228 | getBymoduleId | c.t.r.s.RoleModuleMappingServiceImpl | No Module available
-02-06-2023 | 10:10:50.378 | INFO  | 236 | getBymoduleId | c.t.r.s.RoleModuleMappingServiceImpl | The method getAllModule has been ended
-02-06-2023 | 10:11:04.335 | INFO  | 200 | update | c.t.r.s.RoleServiceImpl | Entered into updateRole method
-02-06-2023 | 10:11:04.345 | ERROR | 252 | update | c.t.r.s.RoleServiceImpl | Module with name User not found in the database
-02-06-2023 | 10:11:16.187 | INFO  | 200 | update | c.t.r.s.RoleServiceImpl | Entered into updateRole method
-02-06-2023 | 10:11:16.190 | ERROR | 252 | update | c.t.r.s.RoleServiceImpl | Module with name Investo not found in the database
-02-06-2023 | 10:11:20.099 | INFO  | 200 | update | c.t.r.s.RoleServiceImpl | Entered into updateRole method
-02-06-2023 | 10:11:25.049 | INFO  | 190 | update | c.t.r.s.ModuleServiceImpl | Entered into updateModule method
-02-06-2023 | 10:11:30.314 | INFO  | 190 | update | c.t.r.s.ModuleServiceImpl | Entered into updateModule method
-02-06-2023 | 10:11:37.275 | INFO  | 261 | update | c.t.r.s.RoleModuleMappingServiceImpl | Entered into update method
-02-06-2023 | 10:12:18.019 | INFO  | 261 | update | c.t.r.s.RoleModuleMappingServiceImpl | Entered into update method
-02-06-2023 | 10:12:40.265 | INFO  | 261 | update | c.t.r.s.RoleModuleMappingServiceImpl | Entered into update method
-02-06-2023 | 10:13:42.054 | INFO  | 155 | deleteRoleMapping | c.t.r.s.RoleModuleMappingServiceImpl | Entered into deleteRoleMapping method
-02-06-2023 | 10:13:44.295 | INFO  | 155 | deleteRoleMapping | c.t.r.s.RoleModuleMappingServiceImpl | Entered into deleteRoleMapping method
+05-06-2023 | 09:42:08.209 | INFO  | 55 | logStarting | c.k.v.RoleRestApplication | Starting RoleRestApplication using Java 11.0.18 on PI-IN-L42 with PID 552358 (/home/User-L42/Desktop/Ktestech/veacy/RoleRest/target/classes started by User-L42 in /home/User-L42/Desktop/Ktestech/veacy/RoleRest)
+05-06-2023 | 09:42:08.216 | INFO  | 631 | logStartupProfileInfo | c.k.v.RoleRestApplication | No active profile set, falling back to 1 default profile: "default"
+05-06-2023 | 09:42:08.284 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+05-06-2023 | 09:42:08.285 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+05-06-2023 | 09:42:09.055 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+05-06-2023 | 09:42:09.069 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+05-06-2023 | 09:42:09.639 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8090 (http)
+05-06-2023 | 09:42:09.651 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+05-06-2023 | 09:42:09.652 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+05-06-2023 | 09:42:09.712 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+05-06-2023 | 09:42:09.713 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 1427 ms
+05-06-2023 | 09:42:09.857 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+05-06-2023 | 09:42:09.906 | INFO  | 44 | logVersion | o.h.Version | HHH000412: Hibernate ORM core version 5.6.15.Final
+05-06-2023 | 09:42:10.026 | INFO  | 56 | <clinit> | o.h.a.c.Version | HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+05-06-2023 | 09:42:10.108 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Starting...
+05-06-2023 | 09:42:10.388 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Start completed.
+05-06-2023 | 09:42:10.403 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+05-06-2023 | 09:42:10.647 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+05-06-2023 | 09:42:10.666 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+05-06-2023 | 09:42:10.824 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+05-06-2023 | 09:42:11.576 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+05-06-2023 | 09:42:11.606 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8090 (http) with context path ''
+05-06-2023 | 09:42:11.627 | INFO  | 61 | logStarted | c.k.v.RoleRestApplication | Started RoleRestApplication in 3.889 seconds (JVM running for 4.395)
+05-06-2023 | 09:42:19.658 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+05-06-2023 | 09:42:19.660 | INFO  | 525 | initServletBean | o.s.w.s.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+05-06-2023 | 09:42:19.663 | INFO  | 547 | initServletBean | o.s.w.s.DispatcherServlet | Completed initialization in 2 ms
+05-06-2023 | 09:43:32.432 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+05-06-2023 | 09:43:32.437 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-1 - Shutdown initiated...
+05-06-2023 | 09:43:32.458 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-1 - Shutdown completed.
+05-06-2023 | 10:03:38.066 | INFO  | 55 | logStarting | c.k.v.RoleRestApplication | Starting RoleRestApplication using Java 17.0.6 on PI-IN-L42 with PID 554795 (/home/User-L42/Desktop/Ktestech/veacy/RoleRest/target/classes started by User-L42 in /home/User-L42/Desktop/Ktestech/veacy/RoleRest)
+05-06-2023 | 10:03:38.068 | INFO  | 631 | logStartupProfileInfo | c.k.v.RoleRestApplication | No active profile set, falling back to 1 default profile: "default"
+05-06-2023 | 10:03:38.126 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+05-06-2023 | 10:03:38.127 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+05-06-2023 | 10:03:38.857 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+05-06-2023 | 10:03:38.921 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 53 ms. Found 3 JPA repository interfaces.
+05-06-2023 | 10:03:39.535 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8090 (http)
+05-06-2023 | 10:03:39.545 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+05-06-2023 | 10:03:39.546 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+05-06-2023 | 10:03:39.623 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+05-06-2023 | 10:03:39.623 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 1495 ms
+05-06-2023 | 10:03:39.824 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+05-06-2023 | 10:03:39.870 | INFO  | 44 | logVersion | o.h.Version | HHH000412: Hibernate ORM core version 5.6.15.Final
+05-06-2023 | 10:03:40.018 | INFO  | 56 | <clinit> | o.h.a.c.Version | HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+05-06-2023 | 10:03:40.100 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Starting...
+05-06-2023 | 10:03:40.463 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Start completed.
+05-06-2023 | 10:03:40.490 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+05-06-2023 | 10:03:41.135 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+05-06-2023 | 10:03:41.144 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+05-06-2023 | 10:03:41.655 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+05-06-2023 | 10:03:42.405 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+05-06-2023 | 10:03:42.444 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8090 (http) with context path ''
+05-06-2023 | 10:03:42.458 | INFO  | 61 | logStarted | c.k.v.RoleRestApplication | Started RoleRestApplication in 4.811 seconds (JVM running for 5.644)
+05-06-2023 | 10:03:51.765 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+05-06-2023 | 10:03:51.765 | INFO  | 525 | initServletBean | o.s.w.s.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+05-06-2023 | 10:03:51.767 | INFO  | 547 | initServletBean | o.s.w.s.DispatcherServlet | Completed initialization in 2 ms
+05-06-2023 | 10:03:51.949 | INFO  | 114 | getAllRole | c.k.v.s.RoleServiceImpl | Fetched the data from the data base
+05-06-2023 | 10:03:51.949 | INFO  | 122 | getAllRole | c.k.v.s.RoleServiceImpl | The method getAllModule has been ended
+05-06-2023 | 10:06:34.440 | INFO  | 55 | logStarting | c.k.v.RoleRestApplication | Starting RoleRestApplication using Java 17.0.6 on PI-IN-L42 with PID 555082 (/home/User-L42/Desktop/GIT/Veacy/RoleRest/target/classes started by User-L42 in /home/User-L42/Desktop/GIT/Veacy/RoleRest)
+05-06-2023 | 10:06:34.442 | INFO  | 631 | logStartupProfileInfo | c.k.v.RoleRestApplication | No active profile set, falling back to 1 default profile: "default"
+05-06-2023 | 10:06:34.498 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+05-06-2023 | 10:06:34.499 | INFO  | 255 | logTo | o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor | For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+05-06-2023 | 10:06:35.203 | INFO  | 132 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+05-06-2023 | 10:06:35.270 | INFO  | 201 | registerRepositoriesIn | o.s.d.r.c.RepositoryConfigurationDelegate | Finished Spring Data repository scanning in 57 ms. Found 3 JPA repository interfaces.
+05-06-2023 | 10:06:35.926 | INFO  | 108 | initialize | o.s.b.w.e.t.TomcatWebServer | Tomcat initialized with port(s): 8090 (http)
+05-06-2023 | 10:06:35.938 | INFO  | 173 | log | o.a.c.c.StandardService | Starting service [Tomcat]
+05-06-2023 | 10:06:35.938 | INFO  | 173 | log | o.a.c.c.StandardEngine | Starting Servlet engine: [Apache Tomcat/9.0.74]
+05-06-2023 | 10:06:36.002 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring embedded WebApplicationContext
+05-06-2023 | 10:06:36.002 | INFO  | 292 | prepareWebApplicationContext | o.s.b.w.s.c.ServletWebServerApplicationContext | Root WebApplicationContext: initialization completed in 1502 ms
+05-06-2023 | 10:06:36.189 | INFO  | 31 | logPersistenceUnitInformation | o.h.j.i.u.LogHelper | HHH000204: Processing PersistenceUnitInfo [name: default]
+05-06-2023 | 10:06:36.232 | INFO  | 44 | logVersion | o.h.Version | HHH000412: Hibernate ORM core version 5.6.15.Final
+05-06-2023 | 10:06:36.375 | INFO  | 56 | <clinit> | o.h.a.c.Version | HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+05-06-2023 | 10:06:36.462 | INFO  | 110 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Starting...
+05-06-2023 | 10:06:36.834 | INFO  | 123 | getConnection | c.z.h.HikariDataSource | HikariPool-1 - Start completed.
+05-06-2023 | 10:06:36.862 | INFO  | 175 | <init> | o.h.d.Dialect | HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+05-06-2023 | 10:06:37.546 | INFO  | 52 | initiateService | o.h.e.t.j.p.i.JtaPlatformInitiator | HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+05-06-2023 | 10:06:37.555 | INFO  | 437 | buildNativeEntityManagerFactory | o.s.o.j.LocalContainerEntityManagerFactoryBean | Initialized JPA EntityManagerFactory for persistence unit 'default'
+05-06-2023 | 10:06:38.040 | WARN  | 223 | openEntityManagerInViewInterceptor | o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration | spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+05-06-2023 | 10:06:38.726 | INFO  | 59 | startServer | o.s.b.d.a.OptionalLiveReloadServer | LiveReload server is running on port 35729
+05-06-2023 | 10:06:38.769 | INFO  | 220 | start | o.s.b.w.e.t.TomcatWebServer | Tomcat started on port(s): 8090 (http) with context path ''
+05-06-2023 | 10:06:38.784 | INFO  | 61 | logStarted | c.k.v.RoleRestApplication | Started RoleRestApplication in 4.779 seconds (JVM running for 5.652)
+05-06-2023 | 10:06:46.203 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Initializing Spring DispatcherServlet 'dispatcherServlet'
+05-06-2023 | 10:06:46.204 | INFO  | 525 | initServletBean | o.s.w.s.DispatcherServlet | Initializing Servlet 'dispatcherServlet'
+05-06-2023 | 10:06:46.206 | INFO  | 547 | initServletBean | o.s.w.s.DispatcherServlet | Completed initialization in 2 ms
+05-06-2023 | 10:06:46.336 | INFO  | 138 | getModuleByName | c.k.v.s.ModuleServiceImpl | The method getAllModule has been ended
+05-06-2023 | 10:06:51.701 | INFO  | 114 | getAllRole | c.k.v.s.RoleServiceImpl | Fetched the data from the data base
+05-06-2023 | 10:06:51.701 | INFO  | 122 | getAllRole | c.k.v.s.RoleServiceImpl | The method getAllModule has been ended
+05-06-2023 | 10:07:01.700 | INFO  | 157 | getRoleByName | c.k.v.s.RoleServiceImpl | The method getRoleByName has been ended
+05-06-2023 | 10:07:07.595 | INFO  | 56 | createModule | c.k.v.s.ModuleServiceImpl | Entered into createModule method
+05-06-2023 | 10:07:09.119 | INFO  | 56 | createModule | c.k.v.s.ModuleServiceImpl | Entered into createModule method
+05-06-2023 | 10:07:11.829 | INFO  | 56 | createModule | c.k.v.s.ModuleServiceImpl | Entered into createModule method
+05-06-2023 | 10:07:11.840 | WARN  | 79 | createModule | c.k.v.s.ModuleServiceImpl | Module is not created
+05-06-2023 | 10:07:17.911 | INFO  | 57 | createRole | c.k.v.s.RoleServiceImpl | Entered into createRole method
+05-06-2023 | 10:07:17.912 | WARN  | 84 | createRole | c.k.v.s.RoleServiceImpl | Invalid Attribute or Field Exception
+05-06-2023 | 10:07:17.924 | WARN  | 208 | logException | o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver | Resolved [com.kaytes.veacy.exception.InvalidAttributeOrFieldException: Invalid Attribute or Field Exception]
+05-06-2023 | 10:07:21.013 | INFO  | 57 | createRole | c.k.v.s.RoleServiceImpl | Entered into createRole method
+05-06-2023 | 10:07:21.015 | INFO  | 62 | createRole | c.k.v.s.RoleServiceImpl | Validated the input data
+05-06-2023 | 10:07:31.849 | INFO  | 114 | getAllRole | c.k.v.s.RoleServiceImpl | Fetched the data from the data base
+05-06-2023 | 10:07:31.849 | INFO  | 122 | getAllRole | c.k.v.s.RoleServiceImpl | The method getAllModule has been ended
+05-06-2023 | 10:07:40.170 | INFO  | 67 | createRoleMapping | c.k.v.s.RoleModuleMappingServiceImpl | Entered into createRoleMapping method
+05-06-2023 | 10:07:41.156 | INFO  | 67 | createRoleMapping | c.k.v.s.RoleModuleMappingServiceImpl | Entered into createRoleMapping method
+05-06-2023 | 10:07:42.078 | INFO  | 67 | createRoleMapping | c.k.v.s.RoleModuleMappingServiceImpl | Entered into createRoleMapping method
+05-06-2023 | 10:07:43.862 | WARN  | 208 | logException | o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver | Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character (',' (code 44)): expected a value; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character (',' (code 44)): expected a value<EOL> at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 3, column: 16]]
+05-06-2023 | 10:07:48.055 | INFO  | 129 | getAllRoleModuleMappings | c.k.v.s.RoleModuleMappingServiceImpl | The method getAllModule has been ended
+05-06-2023 | 10:07:55.930 | INFO  | 155 | deleteRoleMapping | c.k.v.s.RoleModuleMappingServiceImpl | Entered into deleteRoleMapping method
+05-06-2023 | 10:07:59.982 | INFO  | 155 | deleteRoleMapping | c.k.v.s.RoleModuleMappingServiceImpl | Entered into deleteRoleMapping method
+05-06-2023 | 10:08:00.967 | INFO  | 155 | deleteRoleMapping | c.k.v.s.RoleModuleMappingServiceImpl | Entered into deleteRoleMapping method
+05-06-2023 | 10:08:10.295 | INFO  | 159 | deleteModule | c.k.v.s.ModuleServiceImpl | Entered into deleteModule method
+05-06-2023 | 10:08:11.426 | INFO  | 159 | deleteModule | c.k.v.s.ModuleServiceImpl | Entered into deleteModule method
+05-06-2023 | 10:08:17.712 | INFO  | 167 | deleteRole | c.k.v.s.RoleServiceImpl | Entered into deleteRole method
+05-06-2023 | 10:08:20.001 | INFO  | 167 | deleteRole | c.k.v.s.RoleServiceImpl | Entered into deleteRole method
+05-06-2023 | 10:08:20.877 | INFO  | 167 | deleteRole | c.k.v.s.RoleServiceImpl | Entered into deleteRole method
+05-06-2023 | 10:08:26.232 | INFO  | 159 | shutdown | o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin | Application shutdown requested.
+05-06-2023 | 10:08:26.236 | INFO  | 173 | log | o.a.c.c.StandardService | Stopping service [Tomcat]
+05-06-2023 | 10:08:26.238 | INFO  | 173 | log | o.a.c.c.C.[.[.[/] | Destroying Spring FrameworkServlet 'dispatcherServlet'
+05-06-2023 | 10:08:26.246 | INFO  | 651 | destroy | o.s.o.j.LocalContainerEntityManagerFactoryBean | Closing JPA EntityManagerFactory for persistence unit 'default'
+05-06-2023 | 10:08:26.250 | INFO  | 350 | close | c.z.h.HikariDataSource | HikariPool-1 - Shutdown initiated...
+05-06-2023 | 10:08:26.261 | INFO  | 352 | close | c.z.h.HikariDataSource | HikariPool-1 - Shutdown completed.
