@@ -5,10 +5,11 @@
 package com.kaytes.veacy.support;
 
 import org.springframework.stereotype.Service;
-import com.kaytes.veacy.apiresponse.ApiReturnResponse;
-import com.kaytes.veacy.apiresponse.ModuleApiResponse;
-import com.kaytes.veacy.apiresponse.RoleApiResponse;
-import com.kaytes.veacy.apiresponse.RoleModuleMappingApiResponse;
+
+import com.kaytes.veacy.dto.ApiReturnResponse;
+import com.kaytes.veacy.dto.ModuleApiResponse;
+import com.kaytes.veacy.dto.RoleApiResponse;
+import com.kaytes.veacy.dto.RoleModuleMappingApiResponse;
 
 /**
  * The RoleServiceImpl class provides an implementation of the RoleService
@@ -24,28 +25,28 @@ public class Util {
 	RoleModuleMappingApiResponse roleModuleMappingApiResponse = new RoleModuleMappingApiResponse();
 	ApiReturnResponse apiReturnResponse = new ApiReturnResponse(); 
 
-	public RoleApiResponse setRoleApiResponseMessage(String message, boolean status, String code) {
+	public RoleApiResponse setRoleApiResponseMessage(String message, boolean status, int code) {
 		roleApiResponse.setMessage(message);
 		roleApiResponse.setStatus(status);
 		roleApiResponse.setStatusCode(code);
 		return roleApiResponse;
 	}
 	
-	public ModuleApiResponse setModuleApiResponseMessage(String message, boolean status, String code) {
+	public ModuleApiResponse setModuleApiResponseMessage(String message, boolean status, int code) {
 		moduleApiResponse.setMessage(message);
 		moduleApiResponse.setStatus(status);
 		moduleApiResponse.setStatusCode(code);
 		return moduleApiResponse;
 	}
 	
-	public RoleModuleMappingApiResponse setRoleModuleMappingApiResponseMessage(String message, boolean status, String code) {
+	public RoleModuleMappingApiResponse setRoleModuleMappingApiResponseMessage(String message, boolean status, int code) {
 		roleModuleMappingApiResponse.setMessage(message);
 		roleModuleMappingApiResponse.setStatus(status);
 		roleModuleMappingApiResponse.setStatusCode(code);
 		return roleModuleMappingApiResponse;
 	}
 	
-	public ApiReturnResponse setApiReturnResponseMessage(String message, boolean status, String code) {
+	public ApiReturnResponse setApiReturnResponseMessage(String message, boolean status, int code) {
 		apiReturnResponse.setMessage(message);
 		apiReturnResponse.setStatus(status);
 		apiReturnResponse.setStatusCode(code);

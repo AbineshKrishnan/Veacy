@@ -15,14 +15,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.kaytes.veacy.apiresponse.ApiReturnResponse;
-import com.kaytes.veacy.apiresponse.MessageProperties;
-import com.kaytes.veacy.apiresponse.RoleApiResponse;
+import com.kaytes.veacy.dto.ApiReturnResponse;
+import com.kaytes.veacy.dto.RoleApiResponse;
 import com.kaytes.veacy.entity.Role;
-import com.kaytes.veacy.entityresponse.RoleEntityApiResponse;
 import com.kaytes.veacy.exception.InvalidAttributeOrFieldException;
 import com.kaytes.veacy.model.RoleModel;
+import com.kaytes.veacy.properties.MessageProperties;
 import com.kaytes.veacy.repository.RoleRepository;
+import com.kaytes.veacy.response.RoleResponse;
 import com.kaytes.veacy.service.RoleService;
 import com.kaytes.veacy.support.Util;
 
@@ -46,7 +46,7 @@ public class RoleServiceImpl implements RoleService {
 	MessageProperties messageProperties;
 
 	@Autowired
-	Util util ;
+	Util util;
 
 	/**
 	 * {@inheritDoc}
@@ -55,36 +55,48 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public ResponseEntity<ApiReturnResponse> createRole(RoleModel roleModel) {
 		log.info("Entered into createRole method");
-
-		if (!(roleModel.getName().isEmpty() || roleModel.getDescription().isEmpty())) {
-			try {
+		try {
+			if (!(roleModel.getName().isEmpty() || roleModel.getDescription().isEmpty())) {
 				if (roleRepository.findByName(roleModel.getName()).isEmpty()) {
 					log.info("Validated the input data");
 					Role role = new Role();
 					BeanUtils.copyProperties(roleModel, role);
 					roleRepository.save(role);
 					log.debug("Saving Role {} data to the database ", role);
-					apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-							messageProperties.getERROR_CODE_200());
+					apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+							messageProperties.getErrorCode200());
 					return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
 
 				} else {
 					log.warn("Role already exists");
-					apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getROLE_ALREADY_EXISTS(),
-							Boolean.FALSE, messageProperties.getERROR_CODE_200());
+					apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getRoleAlreadyExists(),
+							Boolean.FALSE, messageProperties.getErrorCode400());
 					return new ResponseEntity<>(apiReturnResponse, HttpStatus.NOT_ACCEPTABLE);
 				}
-			} catch (Exception e) {
-				log.error("Role is not created");
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(),
-						Boolean.FALSE, messageProperties.getERROR_CODE_500());
-				return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			} else {
+				log.warn("Invalid Attribute or Field Exception");
+				throw new InvalidAttributeOrFieldException("Invalid Attribute or Field Exception123");
 			}
-		} else {
-			log.warn("Invalid Attribute or Field Exception");
-			throw new InvalidAttributeOrFieldException("Invalid Attribute or Field Exception");
+		} 
+		catch(NullPointerException e) {
+			log.warn("Invalid Attribute");
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidAttribute(),
+							Boolean.FALSE, messageProperties.getErrorCode400());
+					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
+		catch(InvalidAttributeOrFieldException e) {
+			log.warn("Invalid Value");
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(),
+							Boolean.FALSE, messageProperties.getErrorCode400());
+					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			log.warn("Role is not created");
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInternalServerError(),
+					Boolean.FALSE, messageProperties.getErrorCode500());
+			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**
@@ -100,24 +112,24 @@ public class RoleServiceImpl implements RoleService {
 			List<Role> roleList = roleRepository.findAll();
 			if (roleList.isEmpty()) {
 				log.warn("No Module available");
-				response = util.setRoleApiResponseMessage(messageProperties.getNOT_FOUND(), Boolean.FALSE,
-						messageProperties.getERROR_CODE_200());
+				response = util.setRoleApiResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
+						messageProperties.getErrorCode200());
 				return response;
 			}
 			log.debug("The displayed details:\n" + roleList);
-			List<RoleEntityApiResponse> roleEntityApiResponseList = new ArrayList<>();
+			List<RoleResponse> roleResponseList = new ArrayList<>();
 			for (Role role : roleList) {
-				RoleEntityApiResponse roleModel = new RoleEntityApiResponse();
-				BeanUtils.copyProperties(role, roleModel);
-				roleEntityApiResponseList.add(roleModel);
+				RoleResponse roleResponse = new RoleResponse();
+				BeanUtils.copyProperties(role, roleResponse);
+				roleResponseList.add(roleResponse);
 			}
 			log.info("Fetched the data from the data base");
-			response = util.setRoleApiResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-					messageProperties.getERROR_CODE_200());
-			response.setRoleModelList(roleEntityApiResponseList);
+			response = util.setRoleApiResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+					messageProperties.getErrorCode200());
+			response.setRoleModelList(roleResponseList);
 		} catch (Exception e) {
-			util.setRoleApiResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(), Boolean.FALSE,
-					messageProperties.getERROR_CODE_500());
+			util.setRoleApiResponseMessage(messageProperties.getInternalServerError(), Boolean.FALSE,
+					messageProperties.getErrorCode500());
 		}
 		log.info("The method getAllModule has been ended");
 		return response;
@@ -136,23 +148,23 @@ public class RoleServiceImpl implements RoleService {
 			Role role = optionalRole.get();
 			if (optionalRole.isEmpty()) {
 				log.warn("No Role available");
-				roleApiResponse = util.setRoleApiResponseMessage(messageProperties.getNOT_FOUND(), Boolean.FALSE,
-						messageProperties.getERROR_CODE_200());
+				roleApiResponse = util.setRoleApiResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
+						messageProperties.getErrorCode200());
 				return roleApiResponse;
 			} else {
 				log.debug("The displayed details:\n" + role);
 			}
-			List<RoleEntityApiResponse> roleEntityApiResponseList = new ArrayList<>();
-			RoleEntityApiResponse roleModel = new RoleEntityApiResponse();
-			BeanUtils.copyProperties(role, roleModel);
-			roleEntityApiResponseList.add(roleModel);
-			roleApiResponse = util.setRoleApiResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-					messageProperties.getERROR_CODE_200());
-			roleApiResponse.setRoleModelList(roleEntityApiResponseList);
+			List<RoleResponse> roleResponseList = new ArrayList<>();
+			RoleResponse roleResponse = new RoleResponse();
+			BeanUtils.copyProperties(role, roleResponse);
+			roleResponseList.add(roleResponse);
+			roleApiResponse = util.setRoleApiResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+					messageProperties.getErrorCode200());
+			roleApiResponse.setRoleModelList(roleResponseList);
 		} catch (Exception e) {
 			log.error("Can't get the Role");
-			util.setRoleApiResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(), Boolean.FALSE,
-					messageProperties.getERROR_CODE_500());
+			util.setRoleApiResponseMessage(messageProperties.getInternalServerError(), Boolean.FALSE,
+					messageProperties.getErrorCode500());
 		}
 		log.info("The method getRoleByName has been ended");
 		return roleApiResponse;
@@ -167,24 +179,24 @@ public class RoleServiceImpl implements RoleService {
 		log.info("Entered into deleteRole method");
 		log.debug("Deleting role with id {} from the database ", name);
 		try {
-			Optional<Role> temp = roleRepository.findByName(name);
-			if (temp.isEmpty()) {
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNOT_FOUND(), Boolean.FALSE,
-						messageProperties.getERROR_CODE_200());
+			Optional<Role> optRole = roleRepository.findByName(name);
+			if (optRole.isEmpty()) {
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
+						messageProperties.getErrorCode200());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.NOT_ACCEPTABLE);
 			} else {
-				Role r3 = temp.get();
-				roleRepository.deleteById(r3.getId());
+				Role role = optRole.get();
+				roleRepository.deleteById(role.getId());
 				log.debug("Deleted the Role with name {} from the database ", name);
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+						messageProperties.getErrorCode200());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.warn("Role is not deleted");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(),
-					Boolean.FALSE, messageProperties.getERROR_CODE_500());
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInternalServerError(),
+					Boolean.FALSE, messageProperties.getErrorCode500());
 			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -210,7 +222,7 @@ public class RoleServiceImpl implements RoleService {
 							if (roleRepository.findByName((String) value).isEmpty()) {
 								updatedRole.setName((String) value);
 							} else {
-								apiReturnResponse.setMessage(messageProperties.getROLE_ALREADY_EXISTS());
+								apiReturnResponse.setMessage(messageProperties.getRoleAlreadyExists());
 								throw new IllegalArgumentException();
 							}
 						}
@@ -243,22 +255,31 @@ public class RoleServiceImpl implements RoleService {
 				});
 				roleRepository.save(updatedRole);
 				log.debug("Updated module {} in the database", updatedRole);
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+						messageProperties.getErrorCode200());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
 			} else {
 				log.error("Module with name {} not found in the database", name);
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNOT_FOUND(), Boolean.TRUE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNotFound(), Boolean.TRUE,
+						messageProperties.getErrorCode400());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
 			}
-		} catch (IllegalArgumentException e) {
+		}
+		catch(InvalidAttributeOrFieldException e) {
+			log.warn("Invalid Value");
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(),
+							Boolean.FALSE, messageProperties.getErrorCode400());
+					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		catch (IllegalArgumentException e) {
+			log.warn("Invalid Attribute");
 			apiReturnResponse.setStatus(Boolean.FALSE);
-			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			apiReturnResponse.setStatusCode(messageProperties.getErrorCode400());
 			return new ResponseEntity<>(apiReturnResponse, HttpStatus.NOT_ACCEPTABLE);
-		} catch (Exception e) {
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(),
-					Boolean.FALSE, messageProperties.getERROR_CODE_500());
+		}
+		catch (Exception e) {
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInternalServerError(),
+					Boolean.FALSE, messageProperties.getErrorCode500());
 			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

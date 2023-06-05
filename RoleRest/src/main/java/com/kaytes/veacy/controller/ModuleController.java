@@ -6,92 +6,46 @@ package com.kaytes.veacy.controller;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.kaytes.veacy.apiresponse.ApiReturnResponse;
-import com.kaytes.veacy.apiresponse.ModuleApiResponse;
+import com.kaytes.veacy.dto.ApiReturnResponse;
+import com.kaytes.veacy.dto.ModuleApiResponse;
 import com.kaytes.veacy.model.ModuleModel;
-import com.kaytes.veacy.service.ModuleService;
 
-/**
- * The ModuleController class is a REST controller that handles HTTP requests
- * related to module management in the application.
- */
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
-@RestController
-@RequestMapping("/module")
-public class ModuleController implements ModuleControllerSwagger{
+@Tag(name = "Module Controller" , description = "This Swagger is for Module Controller")
+public interface ModuleController {
 	
-	@Autowired
-	ModuleService moduleService;
+	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
+			content = {@Content(mediaType = "application/json" ,
+			schema = @Schema(implementation = Module.class))})})
+	public ResponseEntity<ApiReturnResponse> createModule(@RequestBody ModuleModel moduleModel);
 	
-	/**
-     * Create a new m.
-     *
-     * @param module the module object to be created.
-     * @return a ResponseEntity containing the created Module object.
-     */
+	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
+			content = {@Content(mediaType = "application/json" ,
+			schema = @Schema(implementation = Module.class))})})
+	public ModuleApiResponse getAllModule();
 	
-	@PostMapping
-	public ResponseEntity<ApiReturnResponse> createModule(@RequestBody ModuleModel moduleModel) {
-		return moduleService.createModule(moduleModel);
-		
-	}
+	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
+			content = {@Content(mediaType = "application/json" ,
+			schema = @Schema(implementation = Module.class))})})
+	public ModuleApiResponse getModuleByName(@PathVariable("moduleName") String ModuleName);
 	
-	/**
-     * Get all modules.
-     *
-     * @return a ResponseEntity containing of all Module objects.
-     */
+	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
+			content = {@Content(mediaType = "application/json" ,
+			schema = @Schema(implementation = Module.class))})})
+	public ResponseEntity<ApiReturnResponse> deleteModule(@PathVariable String moduleName);
 	
-	@GetMapping
-	public ModuleApiResponse getAllModule(){
-		return moduleService.getAllModule();
-	}
-	
-	/**
-     * Get a module by Name.
-     *
-     * @param name the unique identifier of the module.
-     * @return a ResponseEntity containing the Module object if found, or not found status if not found.
-     */
-	
-	@GetMapping("/{moduleName}")
-	public ModuleApiResponse getModuleByName(@PathVariable("moduleName") String ModuleName){
-		return moduleService.getModuleByName(ModuleName);
-	}
-	
-	/**
-     * Delete a module by its unique name.
-     *
-     * @param name the unique name of the module.
-     * @return a ResponseEntity with no content status.
-     */
-	
-	@DeleteMapping("/{moduleName}")
-	public ResponseEntity<ApiReturnResponse> deleteModule(@PathVariable String moduleName) {
-		return moduleService.deleteModule(moduleName);
-	}
-	
-	/**
-     * Update a module's properties given its unique name.
-     *
-     * @param name the unique name of the module.
-     * @param updates a map containing the properties to be updated and their new values.
-     * @return the updated Module object.
-     */
-	
-	@PatchMapping("/{moduleName}")
-	public ResponseEntity<ApiReturnResponse> updateModule(@PathVariable String moduleName, @RequestBody Map<String, Object> update) {
-		return moduleService.update(moduleName, update);
-	}
+	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
+			content = {@Content(mediaType = "application/json" ,
+			schema = @Schema(implementation = Module.class))})})
+	public ResponseEntity<ApiReturnResponse> updateModule(@PathVariable String name, @RequestBody Map<String, Object> update);
+
 }

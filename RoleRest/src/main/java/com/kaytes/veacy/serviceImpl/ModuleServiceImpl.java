@@ -14,14 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.kaytes.veacy.dto.ApiReturnResponse;
+import com.kaytes.veacy.dto.ModuleApiResponse;
 import com.kaytes.veacy.entity.Module;
-import com.kaytes.veacy.apiresponse.ApiReturnResponse;
-import com.kaytes.veacy.apiresponse.MessageProperties;
-import com.kaytes.veacy.apiresponse.ModuleApiResponse;
-import com.kaytes.veacy.entityresponse.ModuleEntityApiResponse;
 import com.kaytes.veacy.exception.InvalidAttributeOrFieldException;
 import com.kaytes.veacy.model.ModuleModel;
+import com.kaytes.veacy.properties.MessageProperties;
 import com.kaytes.veacy.repository.ModuleRepository;
+import com.kaytes.veacy.response.ModuleResponse;
 import com.kaytes.veacy.service.ModuleService;
 import com.kaytes.veacy.support.Util;
 
@@ -62,23 +63,36 @@ public class ModuleServiceImpl implements ModuleService {
 					BeanUtils.copyProperties(moduleModel, module);
 					moduleRepository.save(module);
 					log.debug("Saving Module{} data to the database ", module);
-					apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-							messageProperties.getERROR_CODE_200());
+					apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+							messageProperties.getErrorCode200());
 					return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
 				} else {
-					apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getMODULE_ALREADY_EXISTS(),
-							Boolean.FALSE, messageProperties.getERROR_CODE_200());
+					apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getModuleAlreadyExists(),
+							Boolean.FALSE, messageProperties.getErrorCode400());
 					return new ResponseEntity<>(apiReturnResponse, HttpStatus.NOT_ACCEPTABLE);
 				}
 
 			} else {
-				throw new InvalidAttributeOrFieldException("Invalid input Exception");
+				throw new InvalidAttributeOrFieldException("Invalid input Exception1");
 			}
-		} catch (Exception e) {
+		}
+		catch(NullPointerException e) {
+			log.warn("Invalid Attribute");
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidAttribute(),
+							Boolean.FALSE, messageProperties.getErrorCode400());
+					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		catch(InvalidAttributeOrFieldException e) {
+			log.warn("Invalid Value");
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(),
+							Boolean.FALSE, messageProperties.getErrorCode400());
+					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			log.warn("Module is not created");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(),
-					Boolean.FALSE, messageProperties.getERROR_CODE_500());
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInternalServerError(),
+					Boolean.FALSE, messageProperties.getErrorCode500());
 			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -95,23 +109,23 @@ public class ModuleServiceImpl implements ModuleService {
 			List<Module> moduleList = moduleRepository.findAll();
 			if (moduleList.isEmpty()) {
 				log.warn("No Module available");
-				moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getNOT_FOUND(), Boolean.FALSE,
-						messageProperties.getERROR_CODE_200());
+				moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
+						messageProperties.getErrorCode200());
 				return moduleApiResponse;
 			}
 
-			List<ModuleEntityApiResponse> moduleEntityApiResponseList = new ArrayList<>();
+			List<ModuleResponse> moduleResponseList = new ArrayList<>();
 			for (Module module : moduleList) {
-				ModuleEntityApiResponse moduleModel = new ModuleEntityApiResponse();
-				BeanUtils.copyProperties(module, moduleModel);
-				moduleEntityApiResponseList.add(moduleModel);
+				ModuleResponse moduleResponse = new ModuleResponse();
+				BeanUtils.copyProperties(module, moduleResponse);
+				moduleResponseList.add(moduleResponse);
 			}
-			moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-					messageProperties.getERROR_CODE_200());
-			moduleApiResponse.setModuleModelList(moduleEntityApiResponseList);
+			moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+					messageProperties.getErrorCode200());
+			moduleApiResponse.setModuleModelList(moduleResponseList);
 		} catch (Exception e) {
-			util.setModuleApiResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(), Boolean.FALSE,
-					messageProperties.getERROR_CODE_500());
+			util.setModuleApiResponseMessage(messageProperties.getInternalServerError(), Boolean.FALSE,
+					messageProperties.getErrorCode500());
 		}
 		return moduleApiResponse;
 	}
@@ -129,23 +143,23 @@ public class ModuleServiceImpl implements ModuleService {
 			Module module = optionalModule.get();
 			if (optionalModule.isEmpty()) {
 				log.warn("No Module available");
-				moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getNOT_FOUND(), Boolean.FALSE,
-						messageProperties.getERROR_CODE_200());
+				moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
+						messageProperties.getErrorCode200());
 				return moduleApiResponse;
 			} else {
 				log.debug("The displayed details:\n" + module);
 			}
 			log.info("The method getAllModule has been ended");
-			List<ModuleEntityApiResponse> moduleEntityApiResponseList = new ArrayList<>();
-			ModuleEntityApiResponse moduleModel = new ModuleEntityApiResponse();
-			BeanUtils.copyProperties(module, moduleModel);
-			moduleEntityApiResponseList.add(moduleModel);
-			moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-					messageProperties.getERROR_CODE_200());
-			moduleApiResponse.setModuleModelList(moduleEntityApiResponseList);
+			List<ModuleResponse> moduleResponseList = new ArrayList<>();
+			ModuleResponse moduleResponse = new ModuleResponse();
+			BeanUtils.copyProperties(module, moduleResponse);
+			moduleResponseList.add(moduleResponse);
+			moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+					messageProperties.getErrorCode200());
+			moduleApiResponse.setModuleModelList(moduleResponseList);
 		} catch (Exception e) {
-			util.setModuleApiResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(), Boolean.FALSE,
-					messageProperties.getERROR_CODE_500());
+			util.setModuleApiResponseMessage(messageProperties.getInternalServerError(), Boolean.FALSE,
+					messageProperties.getErrorCode500());
 		}
 		return moduleApiResponse;
 	}
@@ -161,21 +175,21 @@ public class ModuleServiceImpl implements ModuleService {
 		try {
 			Optional<Module> temp = moduleRepository.findByModuleName(moduleName);
 			if (temp.isEmpty()) {
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNOT_FOUND(), Boolean.FALSE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
+						messageProperties.getErrorCode200());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.NOT_ACCEPTABLE);
 			} else {
 				Module m3 = temp.get();
 				moduleRepository.deleteById(m3.getId());
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+						messageProperties.getErrorCode200());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.warn("Module is not deleted");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(),
-					Boolean.FALSE, messageProperties.getERROR_CODE_500());
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInternalServerError(),
+					Boolean.FALSE, messageProperties.getErrorCode500());
 			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -201,7 +215,7 @@ public class ModuleServiceImpl implements ModuleService {
 							if (moduleRepository.findByModuleName((String) value).isEmpty()) {
 								newModule.setModuleName((String) value);
 							} else {
-								apiReturnResponse.setMessage(messageProperties.getMODULE_ALREADY_EXISTS());
+								apiReturnResponse.setMessage(messageProperties.getModuleAlreadyExists());
 								throw new IllegalArgumentException();
 							}
 						}
@@ -227,22 +241,31 @@ public class ModuleServiceImpl implements ModuleService {
 				});
 				log.debug("Updated module {} in the database", newModule);
 				moduleRepository.save(newModule);
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+						messageProperties.getErrorCode200());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
 			} else {
 				log.error("Module with name {} not found in the database", name);
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNOT_FOUND(), Boolean.TRUE,
-						messageProperties.getERROR_CODE_200());
-				return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNotFound(), Boolean.TRUE,
+						messageProperties.getErrorCode400());
+				return new ResponseEntity<>(apiReturnResponse, HttpStatus.BAD_REQUEST);
 			}
-		} catch (IllegalArgumentException e) {
+		}
+		catch(InvalidAttributeOrFieldException e) {
+			log.warn("Invalid Value");
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(),
+							Boolean.FALSE, messageProperties.getErrorCode400());
+					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		catch (IllegalArgumentException e) {
+			log.warn("Invalid Attribute");
 			apiReturnResponse.setStatus(Boolean.FALSE);
-			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			apiReturnResponse.setStatusCode(messageProperties.getErrorCode400());
 			return new ResponseEntity<>(apiReturnResponse, HttpStatus.NOT_ACCEPTABLE);
-		} catch (Exception e) {
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(),
-					Boolean.FALSE, messageProperties.getERROR_CODE_500());
+		}
+		catch (Exception e) {
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInternalServerError(),
+					Boolean.FALSE, messageProperties.getErrorCode500());
 			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2023-2024 Kaytes Pvt Ltd. The right to copy, distribute, modify, or otherwise
+ * make use of this software may be licensed only pursuant to the terms of an applicable Kaytes Pvt Ltd license agreement.
+ */
 package com.kaytes.veacy.exception;
 
 import java.time.LocalDateTime;
@@ -14,6 +18,7 @@ public class InvalidAttributeOrFieldExceptionHandler extends ResponseEntityExcep
 	
 	@ExceptionHandler(InvalidAttributeOrFieldException.class)
 	public ResponseEntity<Object> handleInvalidAttributeOrFieldException(InvalidAttributeOrFieldException ex, WebRequest request){
+		System.out.println("\n\nHandler Handled.....");
 		ErrorResponse errorResponse = new ErrorResponse();
 		errorResponse.setMessage(ex.getMessage());
 		errorResponse.setTimeStamp(LocalDateTime.now());

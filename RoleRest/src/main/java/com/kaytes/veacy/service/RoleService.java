@@ -8,8 +8,8 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 
-import com.kaytes.veacy.apiresponse.ApiReturnResponse;
-import com.kaytes.veacy.apiresponse.RoleApiResponse;
+import com.kaytes.veacy.dto.ApiReturnResponse;
+import com.kaytes.veacy.dto.RoleApiResponse;
 import com.kaytes.veacy.model.RoleModel;
 
 /**

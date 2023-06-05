@@ -15,17 +15,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.kaytes.veacy.apiresponse.ApiReturnResponse;
-import com.kaytes.veacy.apiresponse.MessageProperties;
-import com.kaytes.veacy.apiresponse.RoleModuleMappingApiResponse;
 import com.kaytes.veacy.entity.Role;
+import com.kaytes.veacy.dto.ApiReturnResponse;
+import com.kaytes.veacy.dto.RoleModuleMappingApiResponse;
 import com.kaytes.veacy.entity.Module;
 import com.kaytes.veacy.entity.RoleModuleMapping;
-import com.kaytes.veacy.entityresponse.RoleModuleMappingEntityApiResponse;
+import com.kaytes.veacy.exception.InvalidAttributeOrFieldException;
 import com.kaytes.veacy.model.RoleModuleMappingModel;
+import com.kaytes.veacy.properties.MessageProperties;
 import com.kaytes.veacy.repository.ModuleRepository;
 import com.kaytes.veacy.repository.RoleModuleMappingRepository;
 import com.kaytes.veacy.repository.RoleRepository;
+import com.kaytes.veacy.response.RoleModuleMappingResponse;
 import com.kaytes.veacy.service.RoleModuleMappingService;
 import com.kaytes.veacy.support.Util;
 
@@ -67,12 +68,12 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 		log.info("Entered into createRoleMapping method");
 		try {
 			if (roleRepository.findById(roleModuleMappingModel.getRoleId()).isEmpty()) {
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNOT_FOUND(), Boolean.FALSE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(), Boolean.FALSE,
+						messageProperties.getErrorCode400());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.BAD_REQUEST);
 			} else if (moduleRepository.findById(roleModuleMappingModel.getModuleId()).isEmpty()) {
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNOT_FOUND(), Boolean.FALSE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(), Boolean.FALSE,
+						messageProperties.getErrorCode400());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.BAD_REQUEST);
 			} else {
 				if (roleModuleMappingRepository
@@ -89,22 +90,35 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 					roleModuleMapping.setModuleId(module);
 					roleModuleMappingRepository.save(roleModuleMapping);
 					log.debug("Saving RoleModuleMapping {} data to the database ", roleModuleMappingModel);
-					apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-							messageProperties.getERROR_CODE_200());
+					apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+							messageProperties.getErrorCode200());
 					return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
 
 				} else {
 					apiReturnResponse = util.setApiReturnResponseMessage(
-							messageProperties.getROLE_MODULE_MAPPING_ALREADY_EXISTS(), Boolean.FALSE,
-							messageProperties.getERROR_CODE_200());
+							messageProperties.getRoleModuleMappingAlreadyExists(), Boolean.FALSE,
+							messageProperties.getErrorCode400());
 					return new ResponseEntity<>(apiReturnResponse, HttpStatus.NOT_ACCEPTABLE);
 				}
 			}
-		} catch (Exception e) {
+		} 
+		catch(NullPointerException e) {
+			log.warn("Invalid Attribute");
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidAttribute(),
+							Boolean.FALSE, messageProperties.getErrorCode400());
+					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		catch(InvalidAttributeOrFieldException e) {
+			log.warn("Invalid Value");
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(),
+							Boolean.FALSE, messageProperties.getErrorCode400());
+					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			log.warn("Role is not created");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(),
-					Boolean.FALSE, messageProperties.getERROR_CODE_500());
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInternalServerError(),
+					Boolean.FALSE, messageProperties.getErrorCode500());
 			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -123,24 +137,24 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 			if (roleModuleMappingList.isEmpty()) {
 				log.warn("No Module available");
 				roleModuleMappingApiResponse = util.setRoleModuleMappingApiResponseMessage(
-						messageProperties.getNOT_FOUND(), Boolean.FALSE, messageProperties.getERROR_CODE_200());
+						messageProperties.getNotFound(), Boolean.FALSE, messageProperties.getErrorCode200());
 				return roleModuleMappingApiResponse;
 			}
 			log.info("The method getAllModule has been ended");
-			List<RoleModuleMappingEntityApiResponse> roleModuleMappingEntityApiResponseList = new ArrayList<>();
+			List<RoleModuleMappingResponse> roleModuleMappingResponseList = new ArrayList<>();
 			for (RoleModuleMapping roleModuleMapping : roleModuleMappingList) {
-				RoleModuleMappingEntityApiResponse roleModuleMappingModel = new RoleModuleMappingEntityApiResponse();
-				roleModuleMappingModel.setRole(roleModuleMapping.getRoleId().getName());
-				roleModuleMappingModel.setModule(roleModuleMapping.getModuleId().getModuleName());
-				BeanUtils.copyProperties(roleModuleMapping, roleModuleMappingModel);
-				roleModuleMappingEntityApiResponseList.add(roleModuleMappingModel);
+				RoleModuleMappingResponse roleModuleMappingResponse = new RoleModuleMappingResponse();
+				roleModuleMappingResponse.setRole(roleModuleMapping.getRoleId().getName());
+				roleModuleMappingResponse.setModule(roleModuleMapping.getModuleId().getModuleName());
+				BeanUtils.copyProperties(roleModuleMapping, roleModuleMappingResponse);
+				roleModuleMappingResponseList.add(roleModuleMappingResponse);
 			}
-			roleModuleMappingApiResponse = util.setRoleModuleMappingApiResponseMessage(messageProperties.getSUCCESS(),
-					Boolean.TRUE, messageProperties.getERROR_CODE_200());
-			roleModuleMappingApiResponse.setRoleModuleMappingEntityApiResponseList(roleModuleMappingEntityApiResponseList);
+			roleModuleMappingApiResponse = util.setRoleModuleMappingApiResponseMessage(messageProperties.getSuccess(),
+					Boolean.TRUE, messageProperties.getErrorCode200());
+			roleModuleMappingApiResponse.setRoleModuleMappingEntityApiResponseList(roleModuleMappingResponseList);
 		} catch (Exception e) {
-			util.setRoleModuleMappingApiResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(), Boolean.FALSE,
-					messageProperties.getERROR_CODE_500());
+			util.setRoleModuleMappingApiResponseMessage(messageProperties.getInternalServerError(), Boolean.FALSE,
+					messageProperties.getErrorCode500());
 		}
 
 		return roleModuleMappingApiResponse;
@@ -157,21 +171,21 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 		try {
 			Optional<RoleModuleMapping> temp = roleModuleMappingRepository.findById(id);
 			if (temp.isEmpty()) {
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNOT_FOUND(), Boolean.FALSE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
+						messageProperties.getErrorCode400());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.NOT_ACCEPTABLE);
 			} else {
 				roleModuleMappingRepository.deleteById(id);
 				log.debug("Deleted the Role Module Mapping with id {} from the database ", id);
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+						messageProperties.getErrorCode200());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.warn("Role Module Mapping is not deleted");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(),
-					Boolean.FALSE, messageProperties.getERROR_CODE_500());
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInternalServerError(),
+					Boolean.FALSE, messageProperties.getErrorCode500());
 			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -188,28 +202,28 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 			List<RoleModuleMapping> optionalRoleModuleMapping = roleModuleMappingRepository.getByRoleId(id);
 			if (optionalRoleModuleMapping.isEmpty()) {
 				log.warn("No Module available");
-				roleModuleMappingApiResponse.setMessage(messageProperties.getNOT_FOUND());
+				roleModuleMappingApiResponse.setMessage(messageProperties.getNotFound());
 				roleModuleMappingApiResponse.setStatus(Boolean.FALSE);
-				roleModuleMappingApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				roleModuleMappingApiResponse.setStatusCode(messageProperties.getErrorCode400());
 				return roleModuleMappingApiResponse;
 			} else {
 				log.debug("The displayed details:\n" + optionalRoleModuleMapping);
 			}
 			log.info("The method getAllModule has been ended");
-			List<RoleModuleMappingEntityApiResponse> roleModuleMappingEntityApiResponseList = new ArrayList<>();
+			List<RoleModuleMappingResponse> roleModuleMappingResponseList = new ArrayList<>();
 			for (RoleModuleMapping roleModuleMapping : optionalRoleModuleMapping) {
-				RoleModuleMappingEntityApiResponse roleModuleMappingModel = new RoleModuleMappingEntityApiResponse();
-				roleModuleMappingModel.setRole(roleModuleMapping.getRoleId().getName());
-				roleModuleMappingModel.setModule(roleModuleMapping.getModuleId().getModuleName());
-				BeanUtils.copyProperties(roleModuleMapping, roleModuleMappingModel);
-				roleModuleMappingEntityApiResponseList.add(roleModuleMappingModel);
+				RoleModuleMappingResponse roleModuleMappingResponse = new RoleModuleMappingResponse();
+				roleModuleMappingResponse.setRole(roleModuleMapping.getRoleId().getName());
+				roleModuleMappingResponse.setModule(roleModuleMapping.getModuleId().getModuleName());
+				BeanUtils.copyProperties(roleModuleMapping, roleModuleMappingResponse);
+				roleModuleMappingResponseList.add(roleModuleMappingResponse);
 			}
-			roleModuleMappingApiResponse = util.setRoleModuleMappingApiResponseMessage(messageProperties.getSUCCESS(),
-					Boolean.TRUE, messageProperties.getERROR_CODE_200());
-			roleModuleMappingApiResponse.setRoleModuleMappingEntityApiResponseList(roleModuleMappingEntityApiResponseList);
+			roleModuleMappingApiResponse = util.setRoleModuleMappingApiResponseMessage(messageProperties.getSuccess(),
+					Boolean.TRUE, messageProperties.getErrorCode200());
+			roleModuleMappingApiResponse.setRoleModuleMappingEntityApiResponseList(roleModuleMappingResponseList);
 		} catch (Exception e) {
-			util.setRoleModuleMappingApiResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(), Boolean.FALSE,
-					messageProperties.getERROR_CODE_500());
+			util.setRoleModuleMappingApiResponseMessage(messageProperties.getInternalServerError(), Boolean.FALSE,
+					messageProperties.getErrorCode500());
 		}
 		return roleModuleMappingApiResponse;
 	}
@@ -226,28 +240,28 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 			List<RoleModuleMapping> optionalRoleModuleMapping = roleModuleMappingRepository.getByModuleId(id);
 			if (optionalRoleModuleMapping.isEmpty()) {
 				log.warn("No Module available");
-				roleModuleMappingApiResponse.setMessage(messageProperties.getNOT_FOUND());
+				roleModuleMappingApiResponse.setMessage(messageProperties.getNotFound());
 				roleModuleMappingApiResponse.setStatus(Boolean.FALSE);
-				roleModuleMappingApiResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+				roleModuleMappingApiResponse.setStatusCode(messageProperties.getErrorCode400());
 				return roleModuleMappingApiResponse;
 			} else {
 				log.debug("The displayed details:\n" + optionalRoleModuleMapping);
 			}
 			log.info("The method getAllModule has been ended");
-			List<RoleModuleMappingEntityApiResponse> roleModuleMappingEntityApiResponseList = new ArrayList<>();
+			List<RoleModuleMappingResponse> roleModuleMappingResponseList = new ArrayList<>();
 			for (RoleModuleMapping roleModuleMapping : optionalRoleModuleMapping) {
-				RoleModuleMappingEntityApiResponse roleModuleMappingModel = new RoleModuleMappingEntityApiResponse();
-				roleModuleMappingModel.setRole(roleModuleMapping.getRoleId().getName());
-				roleModuleMappingModel.setModule(roleModuleMapping.getModuleId().getModuleName());
-				BeanUtils.copyProperties(roleModuleMapping, roleModuleMappingModel);
-				roleModuleMappingEntityApiResponseList.add(roleModuleMappingModel);
+				RoleModuleMappingResponse roleModuleMappingResponse = new RoleModuleMappingResponse();
+				roleModuleMappingResponse.setRole(roleModuleMapping.getRoleId().getName());
+				roleModuleMappingResponse.setModule(roleModuleMapping.getModuleId().getModuleName());
+				BeanUtils.copyProperties(roleModuleMapping, roleModuleMappingResponse);
+				roleModuleMappingResponseList.add(roleModuleMappingResponse);
 			}
-			roleModuleMappingApiResponse = util.setRoleModuleMappingApiResponseMessage(messageProperties.getSUCCESS(),
-					Boolean.TRUE, messageProperties.getERROR_CODE_200());
-			roleModuleMappingApiResponse.setRoleModuleMappingEntityApiResponseList(roleModuleMappingEntityApiResponseList);
+			roleModuleMappingApiResponse = util.setRoleModuleMappingApiResponseMessage(messageProperties.getSuccess(),
+					Boolean.TRUE, messageProperties.getErrorCode200());
+			roleModuleMappingApiResponse.setRoleModuleMappingEntityApiResponseList(roleModuleMappingResponseList);
 		} catch (Exception e) {
-			util.setRoleModuleMappingApiResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(), Boolean.FALSE,
-					messageProperties.getERROR_CODE_500());
+			util.setRoleModuleMappingApiResponseMessage(messageProperties.getInternalServerError(), Boolean.FALSE,
+					messageProperties.getErrorCode500());
 		}
 		return roleModuleMappingApiResponse;
 	}
@@ -270,14 +284,14 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 						Role role = new Role();
 						role.setId((int) value);
 						if (roleRepository.findById(role.getId()).isEmpty()) {
-							apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
+							apiReturnResponse.setMessage(messageProperties.getNotFound());
 							throw new IllegalArgumentException();
 						} else {
 							if (roleModuleMappingRepository
 									.getRoleIdAndModuleId(newModule.getModuleId().getId(), role.getId()).isEmpty()) {
 								newModule.setRoleId(role);
 							} else {
-								apiReturnResponse.setMessage(messageProperties.getROLE_MODULE_MAPPING_ALREADY_EXISTS());
+								apiReturnResponse.setMessage(messageProperties.getRoleModuleMappingAlreadyExists());
 								throw new IllegalArgumentException();
 							}
 						}
@@ -287,14 +301,14 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 						Module module = new Module();
 						module.setId((int) value);
 						if (moduleRepository.findById(module.getId()).isEmpty()) {
-							apiReturnResponse.setMessage(messageProperties.getNOT_FOUND());
+							apiReturnResponse.setMessage(messageProperties.getNotFound());
 							throw new IllegalArgumentException();
 						} else {
 							if (roleModuleMappingRepository
 									.getRoleIdAndModuleId(module.getId(), newModule.getRoleId().getId()).isEmpty()) {
 								newModule.setModuleId(module);
 							} else {
-								apiReturnResponse.setMessage(messageProperties.getROLE_MODULE_MAPPING_ALREADY_EXISTS());
+								apiReturnResponse.setMessage(messageProperties.getRoleModuleMappingAlreadyExists());
 								throw new IllegalArgumentException();
 							}
 						}
@@ -318,22 +332,31 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 				});
 				log.debug("Updated Role Module Mapping {} in the database", newModule);
 				roleModuleMappingRepository.save(newModule);
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSUCCESS(), Boolean.TRUE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getSuccess(), Boolean.TRUE,
+						messageProperties.getErrorCode200());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
 			} else {
 				log.error("Module with id {} not found in the database", id);
-				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNOT_FOUND(), Boolean.TRUE,
-						messageProperties.getERROR_CODE_200());
+				apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getNotFound(), Boolean.TRUE,
+						messageProperties.getErrorCode400());
 				return new ResponseEntity<>(apiReturnResponse, HttpStatus.OK);
 			}
-		} catch (IllegalArgumentException e) {
+		}
+		catch(InvalidAttributeOrFieldException e) {
+			log.warn("Invalid Value");
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(),
+							Boolean.FALSE, messageProperties.getErrorCode400());
+					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		catch (IllegalArgumentException e) {
+			log.warn("Invalid Attribute");
 			apiReturnResponse.setStatus(Boolean.FALSE);
-			apiReturnResponse.setStatusCode(messageProperties.getERROR_CODE_200());
+			apiReturnResponse.setStatusCode(messageProperties.getErrorCode400());
 			return new ResponseEntity<>(apiReturnResponse, HttpStatus.NOT_ACCEPTABLE);
-		} catch (Exception e) {
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getINERNAL_SERVER_ERROR(),
-					Boolean.FALSE, messageProperties.getERROR_CODE_500());
+		}
+		catch (Exception e) {
+			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInternalServerError(),
+					Boolean.FALSE, messageProperties.getErrorCode500());
 			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

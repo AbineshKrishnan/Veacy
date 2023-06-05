@@ -6,8 +6,9 @@ package com.kaytes.veacy.service;
 
 import java.util.Map;
 import org.springframework.http.ResponseEntity;
-import com.kaytes.veacy.apiresponse.ApiReturnResponse;
-import com.kaytes.veacy.apiresponse.RoleModuleMappingApiResponse;
+
+import com.kaytes.veacy.dto.ApiReturnResponse;
+import com.kaytes.veacy.dto.RoleModuleMappingApiResponse;
 import com.kaytes.veacy.model.RoleModuleMappingModel;
 
 /**
