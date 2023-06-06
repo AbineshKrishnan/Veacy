@@ -54,7 +54,7 @@ public class RoleModuleMappingControllerImpl implements RoleModuleMappingControl
      */
 	
 	@GetMapping
-	public RoleModuleMappingApiResponse getAllRoleModuleMappings(){
+	public ResponseEntity<RoleModuleMappingApiResponse> getAllRoleModuleMappings(){
 		return roleMappingService.getAllRoleModuleMappings();
 	}
 	
@@ -66,7 +66,7 @@ public class RoleModuleMappingControllerImpl implements RoleModuleMappingControl
      */
 	
 	@GetMapping("/getbyroleid/{id}")
-	public RoleModuleMappingApiResponse getByRoleId(@PathVariable int id){
+	public ResponseEntity<RoleModuleMappingApiResponse> getByRoleId(@PathVariable int id){
 		return roleMappingService.getByRoleId(id);
 	}
 	
@@ -78,7 +78,7 @@ public class RoleModuleMappingControllerImpl implements RoleModuleMappingControl
      */
 	
 	@GetMapping("/getbymoduleid/{id}")
-	public RoleModuleMappingApiResponse getBymoduleId(@PathVariable int id){
+	public ResponseEntity<RoleModuleMappingApiResponse> getBymoduleId(@PathVariable int id){
 		return roleMappingService.getBymoduleId(id);
 	}
 	

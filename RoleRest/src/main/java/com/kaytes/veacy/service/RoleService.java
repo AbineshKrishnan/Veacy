@@ -34,7 +34,7 @@ public interface RoleService {
      * @return a list of Role objects.
      */
 	
-	public ApiReturnResponse  getAllRole();
+	public ResponseEntity<RoleApiResponse>  getAllRole();
 
 	/**
      * Retrieve a role by its unique name.
@@ -43,7 +43,7 @@ public interface RoleService {
      * @return an Optional object containing the Role if found, or empty if not found.
      */
 	
-	public RoleApiResponse getRoleByName(String name);
+	public ResponseEntity<RoleApiResponse> getRoleByName(String name);
 
 	/**
      * Delete a role from the data source by its unique name.

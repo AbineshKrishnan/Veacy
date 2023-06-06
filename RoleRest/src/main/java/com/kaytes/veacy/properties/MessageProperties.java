@@ -5,7 +5,6 @@
 package com.kaytes.veacy.properties;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -16,7 +15,6 @@ import lombok.Getter;
 
 @Getter
 @Component
-@PropertySource("classpath:message.properties")
 public class MessageProperties {
 	
 	@Value( "${errorCode200}")

@@ -55,7 +55,7 @@ public class ModuleControllerImpl implements ModuleController{
      */
 	
 	@GetMapping
-	public ModuleApiResponse getAllModule(){
+	public ResponseEntity<ModuleApiResponse> getAllModule(){
 		return moduleService.getAllModule();
 	}
 	
@@ -67,7 +67,7 @@ public class ModuleControllerImpl implements ModuleController{
      */
 	
 	@GetMapping("/{moduleName}")
-	public ModuleApiResponse getModuleByName(@PathVariable("moduleName") String ModuleName){
+	public ResponseEntity<ModuleApiResponse> getModuleByName(@PathVariable("moduleName") String ModuleName){
 		return moduleService.getModuleByName(ModuleName);
 	}
 	

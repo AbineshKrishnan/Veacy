@@ -25,28 +25,28 @@ public class Util {
 	RoleModuleMappingApiResponse roleModuleMappingApiResponse = new RoleModuleMappingApiResponse();
 	ApiReturnResponse apiReturnResponse = new ApiReturnResponse(); 
 
-	public RoleApiResponse setRoleApiResponseMessage(String message, boolean status, int code) {
+	public RoleApiResponse setRoleApiResponseMessage(String message, Boolean status, int code) {
 		roleApiResponse.setMessage(message);
 		roleApiResponse.setStatus(status);
 		roleApiResponse.setStatusCode(code);
 		return roleApiResponse;
 	}
 	
-	public ModuleApiResponse setModuleApiResponseMessage(String message, boolean status, int code) {
+	public ModuleApiResponse setModuleApiResponseMessage(String message, Boolean status, int code) {
 		moduleApiResponse.setMessage(message);
 		moduleApiResponse.setStatus(status);
 		moduleApiResponse.setStatusCode(code);
 		return moduleApiResponse;
 	}
 	
-	public RoleModuleMappingApiResponse setRoleModuleMappingApiResponseMessage(String message, boolean status, int code) {
+	public RoleModuleMappingApiResponse setRoleModuleMappingApiResponseMessage(String message, Boolean status, int code) {
 		roleModuleMappingApiResponse.setMessage(message);
 		roleModuleMappingApiResponse.setStatus(status);
 		roleModuleMappingApiResponse.setStatusCode(code);
 		return roleModuleMappingApiResponse;
 	}
 	
-	public ApiReturnResponse setApiReturnResponseMessage(String message, boolean status, int code) {
+	public ApiReturnResponse setApiReturnResponseMessage(String message, Boolean status, int code) {
 		apiReturnResponse.setMessage(message);
 		apiReturnResponse.setStatus(status);
 		apiReturnResponse.setStatusCode(code);

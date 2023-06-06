@@ -32,7 +32,7 @@ public interface ModuleService {
      * @return a response of Module objects.
      */
 	
-	public ModuleApiResponse getAllModule();
+	public ResponseEntity<ModuleApiResponse> getAllModule();
 
 	/**
      * Retrieve a module by its unique name.
@@ -41,7 +41,7 @@ public interface ModuleService {
      * @return an Optional object containing the Module if found, or empty if not found.
      */
 	
-	public ModuleApiResponse getModuleByName(String moduleName);
+	public ResponseEntity<ModuleApiResponse> getModuleByName(String moduleName);
 
 	/**
      * Delete a module from the data source by its unique name.

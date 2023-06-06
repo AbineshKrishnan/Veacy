@@ -33,7 +33,7 @@ public interface RoleModuleMappingService {
      * @return a list of RoleModuleMapping objects.
      */
 	
-	RoleModuleMappingApiResponse getAllRoleModuleMappings();
+	ResponseEntity<RoleModuleMappingApiResponse> getAllRoleModuleMappings();
 
 	/**
      * Delete a role module mapping from the data source by its unique identifier.
@@ -50,7 +50,7 @@ public interface RoleModuleMappingService {
      * @return a List of object containing the Role Module Mapping if found, or empty if not found.
      */
 	
-	RoleModuleMappingApiResponse getByRoleId(int id);
+	ResponseEntity<RoleModuleMappingApiResponse> getByRoleId(int id);
 
 	/**
      * Retrieve a role module mapping by its unique identifier moduleID.
@@ -59,7 +59,7 @@ public interface RoleModuleMappingService {
      * @return a List of object containing the Role Module Mapping if found, or empty if not found.
      */
 	
-	RoleModuleMappingApiResponse getBymoduleId(int id);
+	ResponseEntity<RoleModuleMappingApiResponse> getBymoduleId(int id);
 
 	/**
      * Update a roleModuleMapping's properties given its unique identifier and a map of the updates.

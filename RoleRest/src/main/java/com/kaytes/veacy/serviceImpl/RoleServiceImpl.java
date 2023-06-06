@@ -104,7 +104,7 @@ public class RoleServiceImpl implements RoleService {
 	 */
 
 	@Override
-	public RoleApiResponse getAllRole() {
+	public ResponseEntity<RoleApiResponse> getAllRole() {
 
 		RoleApiResponse response = new RoleApiResponse();
 		try {
@@ -114,7 +114,7 @@ public class RoleServiceImpl implements RoleService {
 				log.warn("No Module available");
 				response = util.setRoleApiResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
 						messageProperties.getErrorCode200());
-				return response;
+				return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 			}
 			log.debug("The displayed details:\n" + roleList);
 			List<RoleResponse> roleResponseList = new ArrayList<>();
@@ -132,7 +132,7 @@ public class RoleServiceImpl implements RoleService {
 					messageProperties.getErrorCode500());
 		}
 		log.info("The method getAllModule has been ended");
-		return response;
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	/**
@@ -140,21 +140,22 @@ public class RoleServiceImpl implements RoleService {
 	 */
 
 	@Override
-	public RoleApiResponse getRoleByName(String name) {
+	public ResponseEntity<RoleApiResponse> getRoleByName(String name) {
 		RoleApiResponse roleApiResponse = new RoleApiResponse();
 		try {
 			log.debug("Fetching role with name {} from the database ", name);
 			Optional<Role> optionalRole = roleRepository.findByName(name);
-			Role role = optionalRole.get();
 			if (optionalRole.isEmpty()) {
 				log.warn("No Role available");
-				roleApiResponse = util.setRoleApiResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
-						messageProperties.getErrorCode200());
-				return roleApiResponse;
-			} else {
-				log.debug("The displayed details:\n" + role);
+				roleApiResponse.setMessage(messageProperties.getNotFound());
+				roleApiResponse.setStatus(Boolean.FALSE);
+				roleApiResponse.setStatusCode(messageProperties.getErrorCode400());
+//				roleApiResponse = util.setRoleApiResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
+//						messageProperties.getErrorCode200());
+				return new ResponseEntity<>(roleApiResponse, HttpStatus.NOT_FOUND);
 			}
 			List<RoleResponse> roleResponseList = new ArrayList<>();
+			Role role = optionalRole.get();
 			RoleResponse roleResponse = new RoleResponse();
 			BeanUtils.copyProperties(role, roleResponse);
 			roleResponseList.add(roleResponse);
@@ -167,7 +168,7 @@ public class RoleServiceImpl implements RoleService {
 					messageProperties.getErrorCode500());
 		}
 		log.info("The method getRoleByName has been ended");
-		return roleApiResponse;
+		return new ResponseEntity<>(roleApiResponse, HttpStatus.OK);
 	}
 
 	/**

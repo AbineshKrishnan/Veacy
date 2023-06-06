@@ -54,7 +54,7 @@ public class RoleControllerImpl implements RoleController{
      */
 	
 	@GetMapping
-	public ApiReturnResponse getAllRole(){
+	public ResponseEntity<RoleApiResponse> getAllRole(){
 		return roleService.getAllRole();
 	}
 	
@@ -66,7 +66,7 @@ public class RoleControllerImpl implements RoleController{
      */
 	
 	@GetMapping("/{name}")
-	public RoleApiResponse getRoleByName(@PathVariable("name") String name){
+	public ResponseEntity<RoleApiResponse> getRoleByName(@PathVariable("name") String name){
 		return roleService.getRoleByName(name);
 	}
 	

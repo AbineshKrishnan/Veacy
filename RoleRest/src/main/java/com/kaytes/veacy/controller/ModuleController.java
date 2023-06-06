@@ -31,12 +31,12 @@ public interface ModuleController {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Module.class))})})
-	public ModuleApiResponse getAllModule();
+	public ResponseEntity<ModuleApiResponse> getAllModule();
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Module.class))})})
-	public ModuleApiResponse getModuleByName(@PathVariable("moduleName") String ModuleName);
+	public ResponseEntity<ModuleApiResponse> getModuleByName(@PathVariable("moduleName") String ModuleName);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,

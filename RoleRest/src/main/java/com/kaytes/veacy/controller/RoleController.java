@@ -32,12 +32,12 @@ public interface RoleController {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Role.class))})})
-	public ApiReturnResponse getAllRole();
+	public ResponseEntity<RoleApiResponse> getAllRole();
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = Role.class))})})
-	public RoleApiResponse getRoleByName(@PathVariable("name") String name);
+	public ResponseEntity<RoleApiResponse> getRoleByName(@PathVariable("name") String name);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,

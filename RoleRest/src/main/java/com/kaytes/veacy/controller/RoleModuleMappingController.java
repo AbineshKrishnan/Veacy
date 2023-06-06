@@ -32,17 +32,17 @@ public interface RoleModuleMappingController {
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = RoleModuleMapping.class))})})
-	public RoleModuleMappingApiResponse getAllRoleModuleMappings();
+	public ResponseEntity<RoleModuleMappingApiResponse> getAllRoleModuleMappings();
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = RoleModuleMapping.class))})})
-	public RoleModuleMappingApiResponse getByRoleId(@PathVariable int id);
+	public ResponseEntity<RoleModuleMappingApiResponse> getByRoleId(@PathVariable int id);
 	
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,
 			schema = @Schema(implementation = RoleModuleMapping.class))})})
-	public RoleModuleMappingApiResponse getBymoduleId(@PathVariable int id);
+	public ResponseEntity<RoleModuleMappingApiResponse> getBymoduleId(@PathVariable int id);
 		
 	@ApiResponses(value = {@ApiResponse(responseCode="200" , description = "Successfully Completed the Task" ,
 			content = {@Content(mediaType = "application/json" ,

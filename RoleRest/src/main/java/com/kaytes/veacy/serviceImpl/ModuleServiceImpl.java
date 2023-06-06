@@ -102,7 +102,7 @@ public class ModuleServiceImpl implements ModuleService {
 	 */
 
 	@Override
-	public ModuleApiResponse getAllModule() {
+	public ResponseEntity<ModuleApiResponse> getAllModule() {
 		ModuleApiResponse moduleApiResponse = new ModuleApiResponse();
 		try {
 			log.debug("Fetching all the modules from the database");
@@ -111,7 +111,7 @@ public class ModuleServiceImpl implements ModuleService {
 				log.warn("No Module available");
 				moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
 						messageProperties.getErrorCode200());
-				return moduleApiResponse;
+				return new ResponseEntity<>(moduleApiResponse, HttpStatus.NOT_FOUND);
 			}
 
 			List<ModuleResponse> moduleResponseList = new ArrayList<>();
@@ -127,7 +127,7 @@ public class ModuleServiceImpl implements ModuleService {
 			util.setModuleApiResponseMessage(messageProperties.getInternalServerError(), Boolean.FALSE,
 					messageProperties.getErrorCode500());
 		}
-		return moduleApiResponse;
+		return new ResponseEntity<>(moduleApiResponse, HttpStatus.OK);
 	}
 
 	/**
@@ -135,22 +135,24 @@ public class ModuleServiceImpl implements ModuleService {
 	 */
 
 	@Override
-	public ModuleApiResponse getModuleByName(String moduleName) {
+	public ResponseEntity<ModuleApiResponse> getModuleByName(String moduleName) {
 		ModuleApiResponse moduleApiResponse = new ModuleApiResponse();
 		try {
 			log.debug("Fetching module with name {} from the database ", moduleName);
 			Optional<Module> optionalModule = moduleRepository.findByModuleName(moduleName);
-			Module module = optionalModule.get();
+			
 			if (optionalModule.isEmpty()) {
 				log.warn("No Module available");
-				moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
-						messageProperties.getErrorCode200());
-				return moduleApiResponse;
-			} else {
-				log.debug("The displayed details:\n" + module);
+				moduleApiResponse.setMessage(messageProperties.getNotFound());
+				moduleApiResponse.setStatus(Boolean.FALSE);
+				moduleApiResponse.setStatusCode(messageProperties.getErrorCode400());
+//				moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
+//						messageProperties.getErrorCode200());
+				return new ResponseEntity<>(moduleApiResponse, HttpStatus.NOT_FOUND);
 			}
 			log.info("The method getAllModule has been ended");
 			List<ModuleResponse> moduleResponseList = new ArrayList<>();
+			Module module = optionalModule.get();
 			ModuleResponse moduleResponse = new ModuleResponse();
 			BeanUtils.copyProperties(module, moduleResponse);
 			moduleResponseList.add(moduleResponse);
@@ -161,7 +163,7 @@ public class ModuleServiceImpl implements ModuleService {
 			util.setModuleApiResponseMessage(messageProperties.getInternalServerError(), Boolean.FALSE,
 					messageProperties.getErrorCode500());
 		}
-		return moduleApiResponse;
+		return new ResponseEntity<>(moduleApiResponse, HttpStatus.OK);
 	}
 
 	/**
