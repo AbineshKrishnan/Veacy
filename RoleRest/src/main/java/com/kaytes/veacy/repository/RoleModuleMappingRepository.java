@@ -14,14 +14,14 @@ import org.springframework.stereotype.Repository;
 import com.kaytes.veacy.entity.RoleModuleMapping;
 
 @Repository
-public interface RoleModuleMappingRepository extends JpaRepository<RoleModuleMapping, Integer> {
+public interface RoleModuleMappingRepository extends JpaRepository<RoleModuleMapping, Long> {
 
 	@Query(nativeQuery = true,value = "select * from role_module_mapping_table where role_id = ? and is_deleted = false")
-	List<RoleModuleMapping> getByRoleId(int id);
+	List<RoleModuleMapping> getByRoleId(Long id);
 	
 	@Query(nativeQuery = true,value = "select * from role_module_mapping_table where module_id = ? and is_deleted = false")
-	List<RoleModuleMapping> getByModuleId(int id);
+	List<RoleModuleMapping> getByModuleId(Long id);
 	
 	@Query(nativeQuery = true, value = "select * from role_module_mapping_table where module_id =? and role_id =? and is_deleted = false")
-	Optional<RoleModuleMapping> getRoleIdAndModuleId(int moduleId, int roleId);
+	Optional<RoleModuleMapping> getRoleIdAndModuleId(Long moduleId, Long roleId);
 }

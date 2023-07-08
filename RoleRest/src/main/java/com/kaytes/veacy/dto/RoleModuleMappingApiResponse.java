@@ -6,7 +6,7 @@ package com.kaytes.veacy.dto;
 
 import java.util.List;
 
-import com.kaytes.veacy.response.RoleModuleMappingResponse;
+import com.kaytes.veacy.dto.response.RoleModuleMappingResponse;
 
 import lombok.Getter;
 import lombok.Setter;

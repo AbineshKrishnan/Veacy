@@ -32,7 +32,7 @@ public class Module {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@Column(name = "module_name")
 	private String moduleName;

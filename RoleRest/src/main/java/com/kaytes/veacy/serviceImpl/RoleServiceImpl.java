@@ -17,12 +17,12 @@ import org.springframework.stereotype.Service;
 
 import com.kaytes.veacy.dto.ApiReturnResponse;
 import com.kaytes.veacy.dto.RoleApiResponse;
+import com.kaytes.veacy.dto.request.RoleModel;
+import com.kaytes.veacy.dto.response.RoleResponse;
 import com.kaytes.veacy.entity.Role;
 import com.kaytes.veacy.exception.InvalidAttributeOrFieldException;
-import com.kaytes.veacy.model.RoleModel;
 import com.kaytes.veacy.properties.MessageProperties;
 import com.kaytes.veacy.repository.RoleRepository;
-import com.kaytes.veacy.response.RoleResponse;
 import com.kaytes.veacy.service.RoleService;
 import com.kaytes.veacy.support.Util;
 
@@ -75,20 +75,16 @@ public class RoleServiceImpl implements RoleService {
 				}
 			} else {
 				log.warn("Invalid Attribute or Field Exception");
-				throw new InvalidAttributeOrFieldException("Invalid Attribute or Field Exception123");
+				throw new InvalidAttributeOrFieldException("Invalid Attribute or Field Exception");
 			}
 		} 
 		catch(NullPointerException e) {
 			log.warn("Invalid Attribute");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidAttribute(),
-							Boolean.FALSE, messageProperties.getErrorCode400());
-					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new NullPointerException("Invalid Attribute");
 		}
 		catch(InvalidAttributeOrFieldException e) {
 			log.warn("Invalid Value");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(),
-							Boolean.FALSE, messageProperties.getErrorCode400());
-					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new InvalidAttributeOrFieldException("Invalid Value");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -108,7 +104,7 @@ public class RoleServiceImpl implements RoleService {
 
 		RoleApiResponse response = new RoleApiResponse();
 		try {
-			log.debug("Fetching all the roles from the database");
+			log.info("Fetching all the roles from the database");
 			List<Role> roleList = roleRepository.findAll();
 			if (roleList.isEmpty()) {
 				log.warn("No Module available");
@@ -218,40 +214,39 @@ public class RoleServiceImpl implements RoleService {
 					switch (field) {
 					case "name":
 						if (value.toString().isEmpty()) {
-							throw new InvalidAttributeOrFieldException("Invalid Attribute or Field Exception");
+							throw new InvalidAttributeOrFieldException("Invalid input");
 						} else {
 							if (roleRepository.findByName((String) value).isEmpty()) {
 								updatedRole.setName((String) value);
 							} else {
-								apiReturnResponse.setMessage(messageProperties.getRoleAlreadyExists());
-								throw new IllegalArgumentException();
+								throw new IllegalArgumentException("Role Already Exists");
 							}
 						}
 						break;
 					case "description":
 						if (value.toString().isEmpty()) {
-							throw new InvalidAttributeOrFieldException("Invalid Attribute or Field Exception");
+							throw new InvalidAttributeOrFieldException("Invalid input");
 						} else {
 							updatedRole.setDescription((String) value);
 						}
 						break;
 					case "isInvitee":
 						if (value.toString().isEmpty()) {
-							throw new InvalidAttributeOrFieldException("Invalid Attribute or Field Exception");
+							throw new InvalidAttributeOrFieldException("Invalid input");
 						} else {
 							updatedRole.setInvitee((Boolean) value);
 						}
 						break;
 					case "isActive":
 						if (value.toString().isEmpty()) {
-							throw new InvalidAttributeOrFieldException("Invalid Attribute or Field Exception");
+							throw new InvalidAttributeOrFieldException("Invalid input");
 						} else {
 							updatedRole.setActive((Boolean) value);
 						}
 						break;
 					default:
-						apiReturnResponse.setMessage("Invalid field: " + field);
-						throw new IllegalArgumentException();
+						apiReturnResponse.setMessage("Invalid Attribute : " + field);
+						throw new IllegalArgumentException("Invalid Attribute");
 					}
 				});
 				roleRepository.save(updatedRole);
@@ -268,15 +263,15 @@ public class RoleServiceImpl implements RoleService {
 		}
 		catch(InvalidAttributeOrFieldException e) {
 			log.warn("Invalid Value");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(),
-							Boolean.FALSE, messageProperties.getErrorCode400());
-					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new InvalidAttributeOrFieldException(e.getMessage());
+		}
+		catch (NullPointerException e) {
+			log.warn("Invalid input");
+			throw new IllegalArgumentException("Invalid input");
 		}
 		catch (IllegalArgumentException e) {
 			log.warn("Invalid Attribute");
-			apiReturnResponse.setStatus(Boolean.FALSE);
-			apiReturnResponse.setStatusCode(messageProperties.getErrorCode400());
-			return new ResponseEntity<>(apiReturnResponse, HttpStatus.NOT_ACCEPTABLE);
+			throw new IllegalArgumentException(e.getMessage());
 		}
 		catch (Exception e) {
 			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInternalServerError(),

@@ -12,14 +12,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.kaytes.veacy.dto.ApiReturnResponse;
 import com.kaytes.veacy.dto.RoleApiResponse;
+import com.kaytes.veacy.dto.request.RoleModel;
 import com.kaytes.veacy.entity.Role;
-import com.kaytes.veacy.model.RoleModel;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+/**
+ * The RoleController interface is used for customizing the Swagger
+ */
 
 @Tag(name = "Role Controller" , description = "This Swagger is for Role Controller")
 public interface RoleController {

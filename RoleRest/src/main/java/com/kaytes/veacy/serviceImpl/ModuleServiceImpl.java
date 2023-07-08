@@ -17,12 +17,12 @@ import org.springframework.stereotype.Service;
 
 import com.kaytes.veacy.dto.ApiReturnResponse;
 import com.kaytes.veacy.dto.ModuleApiResponse;
+import com.kaytes.veacy.dto.request.ModuleModel;
+import com.kaytes.veacy.dto.response.ModuleResponse;
 import com.kaytes.veacy.entity.Module;
 import com.kaytes.veacy.exception.InvalidAttributeOrFieldException;
-import com.kaytes.veacy.model.ModuleModel;
 import com.kaytes.veacy.properties.MessageProperties;
 import com.kaytes.veacy.repository.ModuleRepository;
-import com.kaytes.veacy.response.ModuleResponse;
 import com.kaytes.veacy.service.ModuleService;
 import com.kaytes.veacy.support.Util;
 
@@ -73,20 +73,16 @@ public class ModuleServiceImpl implements ModuleService {
 				}
 
 			} else {
-				throw new InvalidAttributeOrFieldException("Invalid input Exception1");
+				throw new InvalidAttributeOrFieldException("Invalid input Exception");
 			}
 		}
 		catch(NullPointerException e) {
 			log.warn("Invalid Attribute");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidAttribute(),
-							Boolean.FALSE, messageProperties.getErrorCode400());
-					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new NullPointerException("Invalid Attribute");
 		}
 		catch(InvalidAttributeOrFieldException e) {
 			log.warn("Invalid Value");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(),
-							Boolean.FALSE, messageProperties.getErrorCode400());
-					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new InvalidAttributeOrFieldException("Invalid Attribute or Field Exception");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -146,8 +142,6 @@ public class ModuleServiceImpl implements ModuleService {
 				moduleApiResponse.setMessage(messageProperties.getNotFound());
 				moduleApiResponse.setStatus(Boolean.FALSE);
 				moduleApiResponse.setStatusCode(messageProperties.getErrorCode400());
-//				moduleApiResponse = util.setModuleApiResponseMessage(messageProperties.getNotFound(), Boolean.FALSE,
-//						messageProperties.getErrorCode200());
 				return new ResponseEntity<>(moduleApiResponse, HttpStatus.NOT_FOUND);
 			}
 			log.info("The method getAllModule has been ended");
@@ -217,8 +211,7 @@ public class ModuleServiceImpl implements ModuleService {
 							if (moduleRepository.findByModuleName((String) value).isEmpty()) {
 								newModule.setModuleName((String) value);
 							} else {
-								apiReturnResponse.setMessage(messageProperties.getModuleAlreadyExists());
-								throw new IllegalArgumentException();
+								throw new IllegalArgumentException("Module Already Exists");
 							}
 						}
 						break;
@@ -237,8 +230,7 @@ public class ModuleServiceImpl implements ModuleService {
 						}
 						break;
 					default:
-						apiReturnResponse.setMessage("Invalid field: " + field);
-						throw new IllegalArgumentException();
+						throw new IllegalArgumentException("Invalid Attribute");
 					}
 				});
 				log.debug("Updated module {} in the database", newModule);
@@ -255,15 +247,15 @@ public class ModuleServiceImpl implements ModuleService {
 		}
 		catch(InvalidAttributeOrFieldException e) {
 			log.warn("Invalid Value");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(),
-							Boolean.FALSE, messageProperties.getErrorCode400());
-					return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new InvalidAttributeOrFieldException("Invalid Attribute or Field Exception");
+		}
+		catch (NullPointerException e) {
+			log.warn("Invalid input");
+			throw new IllegalArgumentException("Invalid input");
 		}
 		catch (IllegalArgumentException e) {
 			log.warn("Invalid Attribute");
-			apiReturnResponse.setStatus(Boolean.FALSE);
-			apiReturnResponse.setStatusCode(messageProperties.getErrorCode400());
-			return new ResponseEntity<>(apiReturnResponse, HttpStatus.NOT_ACCEPTABLE);
+			throw new IllegalArgumentException(e.getMessage());
 		}
 		catch (Exception e) {
 			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInternalServerError(),

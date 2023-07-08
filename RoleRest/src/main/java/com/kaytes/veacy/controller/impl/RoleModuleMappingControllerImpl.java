@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kaytes.veacy.controller.RoleModuleMappingController;
 import com.kaytes.veacy.dto.ApiReturnResponse;
 import com.kaytes.veacy.dto.RoleModuleMappingApiResponse;
-import com.kaytes.veacy.model.RoleModuleMappingModel;
+import com.kaytes.veacy.dto.request.RoleModuleMappingModel;
 import com.kaytes.veacy.service.RoleModuleMappingService;
 
 /**
@@ -66,7 +66,7 @@ public class RoleModuleMappingControllerImpl implements RoleModuleMappingControl
      */
 	
 	@GetMapping("/getbyroleid/{id}")
-	public ResponseEntity<RoleModuleMappingApiResponse> getByRoleId(@PathVariable int id){
+	public ResponseEntity<RoleModuleMappingApiResponse> getByRoleId(@PathVariable Long id){
 		return roleMappingService.getByRoleId(id);
 	}
 	
@@ -78,7 +78,7 @@ public class RoleModuleMappingControllerImpl implements RoleModuleMappingControl
      */
 	
 	@GetMapping("/getbymoduleid/{id}")
-	public ResponseEntity<RoleModuleMappingApiResponse> getBymoduleId(@PathVariable int id){
+	public ResponseEntity<RoleModuleMappingApiResponse> getBymoduleId(@PathVariable Long id){
 		return roleMappingService.getBymoduleId(id);
 	}
 	
@@ -90,7 +90,7 @@ public class RoleModuleMappingControllerImpl implements RoleModuleMappingControl
      */
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ApiReturnResponse> deleteRoleMapping(@PathVariable int id) {
+	public ResponseEntity<ApiReturnResponse> deleteRoleMapping(@PathVariable Long id) {
 		return roleMappingService.deleteRoleMapping(id);
 	}
 	
@@ -103,7 +103,7 @@ public class RoleModuleMappingControllerImpl implements RoleModuleMappingControl
      */
 	
 	@PatchMapping("/{id}")
-	public ResponseEntity<ApiReturnResponse> update(@PathVariable int id, @RequestBody Map<String, Object> update) {
+	public ResponseEntity<ApiReturnResponse> update(@PathVariable Long id, @RequestBody Map<String, Object> update) {
 		return roleMappingService.update(id, update);
 	}
 }

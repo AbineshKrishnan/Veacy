@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.kaytes.veacy.dto.ApiReturnResponse;
 import com.kaytes.veacy.dto.RoleModuleMappingApiResponse;
-import com.kaytes.veacy.model.RoleModuleMappingModel;
+import com.kaytes.veacy.dto.request.RoleModuleMappingModel;
 
 /**
  * The RoleModuleMappingService interface provides methods for performing CRUD operations
@@ -41,7 +41,7 @@ public interface RoleModuleMappingService {
      * @param id the unique identifier of the role module mapping.
      */
 	
-	ResponseEntity<ApiReturnResponse> deleteRoleMapping(int id);
+	ResponseEntity<ApiReturnResponse> deleteRoleMapping(Long id);
 
 	/**
      * Retrieve a role module mapping by its unique identifier roleID.
@@ -50,7 +50,7 @@ public interface RoleModuleMappingService {
      * @return a List of object containing the Role Module Mapping if found, or empty if not found.
      */
 	
-	ResponseEntity<RoleModuleMappingApiResponse> getByRoleId(int id);
+	ResponseEntity<RoleModuleMappingApiResponse> getByRoleId(Long id);
 
 	/**
      * Retrieve a role module mapping by its unique identifier moduleID.
@@ -59,7 +59,7 @@ public interface RoleModuleMappingService {
      * @return a List of object containing the Role Module Mapping if found, or empty if not found.
      */
 	
-	ResponseEntity<RoleModuleMappingApiResponse> getBymoduleId(int id);
+	ResponseEntity<RoleModuleMappingApiResponse> getBymoduleId(Long id);
 
 	/**
      * Update a roleModuleMapping's properties given its unique identifier and a map of the updates.
@@ -69,6 +69,6 @@ public interface RoleModuleMappingService {
      * @return the updated Role Module Mapping object.
      */
 	
-	ResponseEntity<ApiReturnResponse> update(int id, Map<String, Object> update);
+	ResponseEntity<ApiReturnResponse> update(Long id, Map<String, Object> update);
 
 }

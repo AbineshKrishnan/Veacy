@@ -18,15 +18,15 @@ import org.springframework.stereotype.Service;
 import com.kaytes.veacy.entity.Role;
 import com.kaytes.veacy.dto.ApiReturnResponse;
 import com.kaytes.veacy.dto.RoleModuleMappingApiResponse;
+import com.kaytes.veacy.dto.request.RoleModuleMappingModel;
+import com.kaytes.veacy.dto.response.RoleModuleMappingResponse;
 import com.kaytes.veacy.entity.Module;
 import com.kaytes.veacy.entity.RoleModuleMapping;
 import com.kaytes.veacy.exception.InvalidAttributeOrFieldException;
-import com.kaytes.veacy.model.RoleModuleMappingModel;
 import com.kaytes.veacy.properties.MessageProperties;
 import com.kaytes.veacy.repository.ModuleRepository;
 import com.kaytes.veacy.repository.RoleModuleMappingRepository;
 import com.kaytes.veacy.repository.RoleRepository;
-import com.kaytes.veacy.response.RoleModuleMappingResponse;
 import com.kaytes.veacy.service.RoleModuleMappingService;
 import com.kaytes.veacy.support.Util;
 
@@ -104,14 +104,16 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 			}
 		} catch (NullPointerException e) {
 			log.warn("Invalid Attribute");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidAttribute(), Boolean.FALSE,
-					messageProperties.getErrorCode400());
-			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+//			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidAttribute(), Boolean.FALSE,
+//					messageProperties.getErrorCode400());
+//			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new NullPointerException("Invalid Attribute");
 		} catch (InvalidAttributeOrFieldException e) {
-			log.warn("Invalid Value1");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(), Boolean.FALSE,
-					messageProperties.getErrorCode400());
-			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			log.warn("Invalid Value");
+//			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(), Boolean.FALSE,
+//					messageProperties.getErrorCode400());
+//			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new InvalidAttributeOrFieldException("Invalid Value");
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.warn("Role is not created");
@@ -163,7 +165,7 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 	 */
 
 	@Override
-	public ResponseEntity<ApiReturnResponse> deleteRoleMapping(int id) {
+	public ResponseEntity<ApiReturnResponse> deleteRoleMapping(Long id) {
 		log.info("Entered into deleteRoleMapping method");
 		log.debug("Deleting Role Module Mapping with id {} from the database ", id);
 		try {
@@ -193,7 +195,7 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 	 */
 
 	@Override
-	public ResponseEntity<RoleModuleMappingApiResponse> getByRoleId(int id) {
+	public ResponseEntity<RoleModuleMappingApiResponse> getByRoleId(Long id) {
 		RoleModuleMappingApiResponse roleModuleMappingApiResponse = new RoleModuleMappingApiResponse();
 		try {
 			log.debug("Fetching the Role Module mappings with Role id {} from the database", id);
@@ -231,7 +233,7 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 	 */
 
 	@Override
-	public ResponseEntity<RoleModuleMappingApiResponse> getBymoduleId(int id) {
+	public ResponseEntity<RoleModuleMappingApiResponse> getBymoduleId(Long id) {
 		RoleModuleMappingApiResponse roleModuleMappingApiResponse = new RoleModuleMappingApiResponse();
 		try {
 			log.debug("Fetching all the Role Module mappings with Module id {} from the database", id);
@@ -269,7 +271,7 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 	 */
 
 	@Override
-	public ResponseEntity<ApiReturnResponse> update(int id, Map<String, Object> update) {
+	public ResponseEntity<ApiReturnResponse> update(Long id, Map<String, Object> update) {
 		log.info("Entered into update method");
 		log.debug("Updating Role Module Mapping with id {} with updates {} ", id, update);
 		try {
@@ -281,10 +283,10 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 					case "roleId":
 						if (value.toString().isEmpty()) {
 							System.out.println("Hi");
-							throw new InvalidAttributeOrFieldException("Invalid Attribute or Field Exception");
+							throw new InvalidAttributeOrFieldException("Invalid Value");
 						}
 						Role role = new Role();
-						role.setId((int) value);
+						role.setId((Long) value);
 						if (roleRepository.findById(role.getId()).isEmpty()) {
 							apiReturnResponse.setMessage(messageProperties.getNotFound());
 							throw new IllegalArgumentException();
@@ -300,7 +302,7 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 						break;
 					case "moduleId":
 						Module module = new Module();
-						module.setId((int) value);
+						module.setId((Long) value);
 						if (moduleRepository.findById(module.getId()).isEmpty()) {
 							apiReturnResponse.setMessage(messageProperties.getNotFound());
 							System.out.println("Hi");
@@ -345,9 +347,10 @@ public class RoleModuleMappingServiceImpl implements RoleModuleMappingService {
 			}
 		} catch (InvalidAttributeOrFieldException e) {
 			log.warn("Invalid Value");
-			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(), Boolean.FALSE,
-					messageProperties.getErrorCode400());
-			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+//			apiReturnResponse = util.setApiReturnResponseMessage(messageProperties.getInvalidInput(), Boolean.FALSE,
+//					messageProperties.getErrorCode400());
+//			return new ResponseEntity<>(apiReturnResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new InvalidAttributeOrFieldException(e.getMessage());
 		} catch (IllegalArgumentException e) {
 			log.warn("Invalid Attribute");
 			apiReturnResponse.setStatus(Boolean.FALSE);

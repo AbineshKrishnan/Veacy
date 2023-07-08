@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kaytes.veacy.controller.ModuleController;
 import com.kaytes.veacy.dto.ApiReturnResponse;
 import com.kaytes.veacy.dto.ModuleApiResponse;
-import com.kaytes.veacy.model.ModuleModel;
+import com.kaytes.veacy.dto.request.ModuleModel;
 import com.kaytes.veacy.service.ModuleService;
 
 /**

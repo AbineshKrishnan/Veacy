@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.kaytes.veacy.dto.ApiReturnResponse;
 import com.kaytes.veacy.dto.ModuleApiResponse;
-import com.kaytes.veacy.model.ModuleModel;
+import com.kaytes.veacy.dto.request.ModuleModel;
 
 /**
  * The ModuleService interface provides methods for performing CRUD operations

@@ -12,13 +12,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.kaytes.veacy.dto.ApiReturnResponse;
 import com.kaytes.veacy.dto.ModuleApiResponse;
-import com.kaytes.veacy.model.ModuleModel;
+import com.kaytes.veacy.dto.request.ModuleModel;
 
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+/**
+ * The ModuleController interface is used for customizing the Swagger
+ */
 
 @Tag(name = "Module Controller" , description = "This Swagger is for Module Controller")
 public interface ModuleController {

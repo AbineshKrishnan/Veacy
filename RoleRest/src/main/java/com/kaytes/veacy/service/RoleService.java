@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.kaytes.veacy.dto.ApiReturnResponse;
 import com.kaytes.veacy.dto.RoleApiResponse;
-import com.kaytes.veacy.model.RoleModel;
+import com.kaytes.veacy.dto.request.RoleModel;
 
 /**
  * The RoleService interface provides methods for performing CRUD operations

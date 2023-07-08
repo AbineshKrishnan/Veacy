@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.kaytes.veacy.controller.RoleController;
 import com.kaytes.veacy.dto.ApiReturnResponse;
 import com.kaytes.veacy.dto.RoleApiResponse;
-import com.kaytes.veacy.model.RoleModel;
+import com.kaytes.veacy.dto.request.RoleModel;
 import com.kaytes.veacy.service.RoleService;
 
 /**

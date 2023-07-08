@@ -34,7 +34,7 @@ public class RoleModuleMapping {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@OneToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")

@@ -14,6 +14,10 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.servers.Server;
 
+/**
+ * The SwaggerConfig class is used for the Configuration for the Swagger
+ */
+
 @Configuration
 @PropertySource("classpath:message.properties")
 public class SwaggerConfig {

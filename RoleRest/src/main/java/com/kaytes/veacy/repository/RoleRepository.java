@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.kaytes.veacy.entity.Role;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Integer> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 
 	@Query(nativeQuery = true,value = "select * from role where name = ? and is_deleted = false")
 	Optional<Role> findByName(String name);

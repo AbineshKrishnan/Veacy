@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kaytes.veacy.entity.Module;
 
 @Repository
-public interface ModuleRepository extends JpaRepository<Module, Integer> {
+public interface ModuleRepository extends JpaRepository<Module, Long> {
 
 	@Query(nativeQuery = true,value = "select * from module_table where module_name = ? and is_deleted = false")
 	Optional<Module> findByModuleName(String moduleName);
